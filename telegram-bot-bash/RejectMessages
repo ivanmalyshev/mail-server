@@ -1,0 +1,46 @@
+#!/usr/local/bin/perl -w
+#
+#  A sample CGI program.
+#
+#  This Perl script is used to disable access this will not stop incoming mail.
+#
+#  The Server address and administrator login name and password should be
+#  defined in the script's text below.
+#
+use CLI;
+
+my $CGServerAddress = "195.98.64.73";
+my $PostmasterLogin = "master\@box.vrn.ru";
+my $PostmasterPassword = `cat /home/mid/telegram_bot/telegram-bot-bash/bin/queue/namepasswd`;
+
+  my $cli = new CGP::CLI( { PeerAddr => $CGServerAddress,
+                            PeerPort => 106,
+                            login    => $PostmasterLogin,
+                            password => $PostmasterPassword,
+			    SecureLogin => 0 } )
+   ||  die "Can't login to CGPro: ".$CGP::ERR_STRING."\n";
+  
+### WRITELOG logLevel logRecord
+
+#$cli->WriteLog(2,'RejectMessages: test log message')
+#    || die "Can't write to log: ".$cli->getErrMessage;
+
+open(F,"$ARGV[0]") || die"==== ??\n";
+$| = 1;
+while(<F>){
+	chomp;
+	$Account = $_ ;
+	$file = $Account ;
+	$Account =~ /.*\/(\d+)/; $Account = $1 ;
+	$nfile = 'Old/'.$Account.'.msg' ;
+# print"$file $nfile ==222\n"; exit 0 ;
+
+	if( -f "$file" ){
+		 `ln $file $nfile`; 
+		 $cli->RejectQueueMessage("$Account", "NONDN")
+        	  || warn "Error: $file " . $cli->getErrMessage . ",quitting";
+#	print "Er : $Account : " . $cli->getErrMessage . "::\n" ;
+	}
+}
+  $cli->Logout;
+

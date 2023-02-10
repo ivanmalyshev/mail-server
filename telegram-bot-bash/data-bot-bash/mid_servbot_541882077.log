@@ -1,0 +1,8 @@
+./bashbot.sh: line 636: ./logs/ERROR.log: Permission denied
+./bashbot.sh: line 636: ./logs/ERROR.log: Permission denied
+./bashbot.sh: line 636: ./logs/ERROR.log: Permission denied
+./bashbot.sh: line 636: ./logs/ERROR.log: Permission denied
+./bashbot.sh: line 636: ./logs/ERROR.log: Permission denied
+./bashbot.sh: line 636: ./logs/ERROR.log: Permission denied
+examples/question.sh: line 34: kill: (20637) - No such process
+./bashbot.sh: line 636: ./logs/ERROR.log: Permission denied

@@ -1,0 +1,1 @@
+./que-smtpi.sh | sort | uniq -c | sort -n

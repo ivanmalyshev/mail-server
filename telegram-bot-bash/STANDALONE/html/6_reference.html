@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Bashobot Documentation - doc/6_reference.html</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Bashobot Documentation - doc/6_reference.html</h1>
+</header>
+<h4><a href="../README.html">Home</a></h4>
+<h2>Bashbot function reference</h2>
+<h3>Send, forward, delete messages</h3>
+<p>To insert line brakes in a message or caption you can place <code>\n</code> in the text.</p>
+<h5>send_action</h5>
+<p><code>send_action</code> shows users what your bot is currently doing.</p>
+<p><em>usage:</em> send_action "CHAT[ID]" "action"</p>
+<p><em>"action":</em> <code>typing</code>, <code>upload_photo</code>, <code>record_video</code>, <code>upload_video</code>, <code>record_audio</code>, <code>upload_audio</code>, <code>upload_document</code>, <code>find_location</code>.</p>
+<p><em>alias:</em> _action "action"</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="ex">send_action</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;typing&quot;</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="ex">send_action</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;record_audio&quot;</span></span></code></pre></div>
+<h5>send_normal_message</h5>
+<p><code>send_normal_message</code> sends text only messages to the given chat.</p>
+<p><em>usage:</em> send_normal_message "CHAT[ID]" "message"</p>
+<p><em>alias:</em> _normal_message "message"</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="ex">send_normal_message</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;this is a text message&quot;</span></span></code></pre></div>
+<h5>send_markdownv2_message</h5>
+<p><code>send_markdownv2_message</code> sends markdown v2 style messages to the given chat. Telegram supports a new <a href="https://core.telegram.org/bots/api#markdownv2-style">Markdown V2 Style</a> which has more formatting codes and is more robust, but incompatible with old telegram markdown style.</p>
+<p>To send characters reserved for markdown v2 formatting, you must prefix them with <code>\</code> ( e.g. <code>\| \= \_ \*</code>).<br />
+<em>Hint</em>: If a message is not sent, have a look in <code>logs/ERROR.log</code></p>
+<p><em>usage:</em> send_markdownv2_message "CHAT[ID]" "markdown message"</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="ex">send_markdownv2_message</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;this is a markdown  message, next word is *bold*&quot;</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="ex">send_markdownv2_message</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;*bold* __underlined__ [text](link)&quot;</span></span></code></pre></div>
+<h5>send_markdown_message</h5>
+<p><code>send_markdown_message</code> sends markdown style messages to the given chat. This is the old, legacy Telegram markdown style, retained for backward compatibility. It supports a <a href="https://core.telegram.org/bots/api#markdown-style">reduced set of Markdown</a> only</p>
+<p><em>usage:</em> send_markdown_message "CHAT[ID]" "markdown message"</p>
+<p><em>alias:</em> _markdown "message"</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="ex">send_markdown_message</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;this is a markdown  message, next word is *bold*&quot;</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="ex">send_markdown_message</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;*bold* _italic_ [text](link)&quot;</span></span></code></pre></div>
+<h5>send_html_message</h5>
+<p><code>send_html_message</code> sends HTML style messages to the given chat. Telegram supports a <a href="https://core.telegram.org/bots/api#html-style">reduced set of HTML</a> only</p>
+<p><em>usage:</em> send_html_message "CHAT[ID]" "html message"</p>
+<p><em>alias:</em> _html_message "message"</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="ex">send_normal_message</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;this is a markdown  message, next word is &lt;b&gt;bold&lt;/b&gt;&quot;</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="ex">send_normal_message</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;&lt;b&gt;bold&lt;/b&gt; &lt;i&gt;italic&gt;&lt;i&gt; &lt;em&gt;italic&gt;/em&gt; &lt;a href=&quot;</span>link<span class="st">&quot;&gt;Text&lt;/a&gt;&quot;</span></span></code></pre></div>
+<h5>forward_message</h5>
+<p><code>forward_mesage</code> forwards a message to the given chat.</p>
+<p><em>usage:</em> forward_message "chat_to" "chat_from" "${MESSAGE[ID]}"</p>
+<p><em>old call:</em> forward "${CHAT[ID]}" "$FROMCHAT" "${MESSAGE[ID]}"</p>
+<p><em>alias:</em> _forward "$FROMCHAT" "${MESSAGE[ID]}"</p>
+<p>See also <a href="https://core.telegram.org/bots/api#formatting-options">Text formatting options</a></p>
+<hr />
+<h5>delete_message</h5>
+<p>A bot can only delete messages if he is admin of a Chat, if not he can delete his own messages only.</p>
+<p><em>usage:</em> delete_message "CHAT[ID]" "${MESSAGE[ID]}"</p>
+<p>See also <a href="https://core.telegram.org/bots/api#deletemessage">deleteMessage limitations</a></p>
+<hr />
+<h5>send_message</h5>
+<p><code>send_message</code> sends any type of message to the given chat. Type of output is steered by keywords within the message.</p>
+<p>The main use case for send_message is to process the output of interactive chats and background jobs. <strong>For regular Bot commands I recommend using of the dedicated send_xxx_message() functions from above.</strong></p>
+<p><em>usage:</em> send_message "CHAT[ID]" "message"</p>
+<p><em>example:</em> - see <a href="2_usage.md#send_message">Usage</a> and <a href="3_advanced.html">Advanced Usage</a></p>
+<hr />
+<h3>File, Album, Location, Venue, Keyboard</h3>
+<h5>send_file</h5>
+<p>send_file can send local files, URL's or file_id's as different filex types (<em>e.g. photo video sticker</em>)</p>
+<p><em>usage:</em> send_file "CHAT[ID]" "file/URL/file_id" "caption" ["type"]</p>
+<p>URL's must start with <code>http://</code> or <code>https://</code> and remote server must send an appropriate media type. A file_id must start with <code>file_id://</code>, all other file names are threated as local files. If Telegram accepts the file <code>BOTSENT[FILE_ID]</code> and <code>BOTSENT[FILE_TYPE]</code> are set.</p>
+<p>Argument "type" is optional, if not given <code>send_file</code> detects file type by the file extension. if file/URL has no extension <code>photo</code> is assumed. Unknown types and extensions are send as type <code>document</code></p>
+<p>Supported file types are: photo (<em>png jpg jpeg gif pic</em>) audio (<em>mp3 flac</em>) sticker (<em>webp</em>) video (<em>mp4</em>) voice (<em>ogg</em>) or document.</p>
+<p>It's recommended to use <strong>absolute path names</strong> for local files (<em>starting with <code>/</code></em>), as relative path names are threated as <strong>relative to UPLOADDIR</strong> <code>data-bot-bash/upload</code>!</p>
+<p>For security reasons the following restrictions apply to local files:</p>
+<ul>
+<li>absolute path name must match the <strong>shell regex</strong> <code>FILE_REGEX</code></li>
+<li>relative path name is threated as relative to <code>UPLOADDIR</code> (<em>default: data-bot-bash/upload</em>)</li>
+<li>path must not start with <code>./</code> and not contain <code>../</code></li>
+</ul>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># send picture from web</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="ex">send_file</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;https://dealz.rrr.de/assets/images/rbofd-1.gif&quot;</span> <span class="st">&quot;My Bot&quot;</span> <span class="st">&quot;photo&quot;</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="ex">send_file</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;https://images-na.ssl-images-amazon.com/images/I/81DQ0FpoSNL._AC_SL1500_.jpg&quot;</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="co"># local file recommended: absolute path</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="ex">send_file</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;/home/user/dog.jpg&quot;</span> <span class="st">&quot;My Dog&quot;</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="co"># relative to UPLOADDIR: data-bot-bash/upload/dog.jpg</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="ex">send_file</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;dog.jpg&quot;</span> <span class="st">&quot;My Dog&quot;</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="co"># change to personal upload dir</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="va">UPLOADDIR=</span><span class="st">&quot;/home/user/myuploaddir&quot;</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="co"># relative to personal upload dir: /home/user/myuploaddir/dog.jpg</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="ex">send_file</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;dog.jpg&quot;</span> <span class="st">&quot;My Dog&quot;</span></span></code></pre></div>
+<h5>send_album</h5>
+<p><em>usage:</em> send_album "CHAT[ID]" "URL1" "URL2" ... "URLn"</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="ex">send_album</span> <span class="st">&quot;</span><span class="va">$(</span><span class="ex">getConfigKey</span> <span class="st">&quot;botadmin&quot;</span><span class="va">)</span><span class="st">&quot;</span> <span class="st">&quot;http://www.rrr.de/slider/main-image1.jpg&quot;</span> <span class="st">&quot;http://www.rrr.de/slider/main-image5.jpg&quot;</span></span></code></pre></div>
+<h5>send_location</h5>
+<p><em>usage:</em> send_location "CHAT[ID]" "Latitude" "Longitude"</p>
+<h5>send_venue</h5>
+<p><em>usage:</em> send_venue "CHAT[ID]" "Latitude" "Longitude" "Title" "Address" "foursquare id (optional)"</p>
+<h5>send_sticker</h5>
+<p><code>send_sticker</code> sends a sticker using a <code>file_id</code> to send a sticker that exists on the Telegram servers.</p>
+<p><em>usage:</em> send_sticker "CHAT[ID]" "file_id"</p>
+<h5>send_dice</h5>
+<p><code>send_dice</code> send an animated emoji and returns a value (<em>e.g. points shown on die</em>).</p>
+<p><em>usage:</em> send_dice "CHAT[ID]" "emoji"</p>
+<p>Emoji must be one of '🎲', '🎯', '🏀', '⚽', '🎰' or ":game_die:" ":dart:" ":basketball:" ":soccer:" :slot_machine:". Dice can have values 1-6 for '🎲' and '🎯', values 1-5 for '🏀' and '⚽', and values 1-64 for '🎰'. Defaults to '🎲'</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># send die and output points</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="ex">send_dice</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;:game_die:&quot;</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="bu">[</span> <span class="st">&quot;</span><span class="va">${BOTSENT[OK]}</span><span class="st">&quot;</span> <span class="ot">=</span> <span class="st">&quot;true&quot;</span><span class="bu"> ]</span> <span class="kw">&amp;&amp;</span> <span class="ex">send_markdownv2_message</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;*Congratulation* you got *</span><span class="va">${BOTSENT[RESULT]}</span><span class="st"> Point(s)*.&quot;</span></span></code></pre></div>
+<hr />
+<h5>send_keyboard</h5>
+<p><code>send_keyboard</code> sends a custom keyboard, Telegram clients will show it instead of the regular keyboard. If the user press a button on the custom keyboard, the text shown on the button is send to the chat.</p>
+<p>Example Keyboard Array definitions:</p>
+<pre><code>- Yes No in one row: &#39;[ &quot;yes&quot; , &quot;no&quot; ]&#39;
+- Yes No plus Maybe in 2.row: &#39;[ &quot;yes&quot; , &quot;no&quot; ] , [ &quot;maybe&quot; ]&#39; 
+- number pad style keyboard: &#39;[ &quot;1&quot; , &quot;2&quot; , &quot;3&quot; ] , [ &quot;4&quot; , &quot;5&quot; , &quot;6&quot; ] , [ &quot;7&quot; , &quot;8&quot; , &quot;9&quot; ] , [ &quot;0&quot; ]&#39;
+</code></pre>
+<p><em>usage:</em> send_keyboard "chat-id" "message" "keyboard"</p>
+<p><em>alias:</em> _keyboard "message" "keyboard"</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1"></a><span class="ex">send_keyboard</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;Say yes or no&quot;</span> <span class="st">&#39;[ &quot;yes&quot; , &quot;no&quot; ]&#39;</span> <span class="co"># in one row</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="ex">send_keyboard</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;Say yes or no&quot;</span> <span class="st">&#39;[ &quot;yes&quot; ] , [ &quot;no&quot; ]&#39;</span> <span class="co"># 2 rows</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="ex">send_keyboard</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;Enter digit&quot;</span> <span class="st">&#39;[ &quot;1&quot; , &quot;2&quot; , &quot;3&quot; ] , [ &quot;4&quot; , &quot;5&quot; , &quot;6&quot; ] , [ &quot;7&quot; , &quot;8&quot; , &quot;9&quot; ] , [ &quot;0&quot; ]&#39;</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="ex">_keyboard_yesno</span>  <span class="co"># see aliases</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="ex">_keyboard_numpad</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a></span></code></pre></div>
+<h5>remove_keyboard</h5>
+<p><code>remove_keyboard</code> deletes the last custom keyboard. Depending on used Telegram client this will hide or delete the custom keyboard.</p>
+<p><em>usage:</em> remove_keybord "$CHAT[ID]" "message"</p>
+<p><em>alias:</em> _del_keyboard "message"</p>
+<p><em>See also: <a href="https://core.telegram.org/bots/api/#replykeyboardmarkup">Keyboard Markup</a></em></p>
+<hr />
+<h5>send_button</h5>
+<p><code>send_button</code> sends a text message with a single button to open an URL attached.</p>
+<p><em>usage:</em> send_button "$CHAT[ID]" "message" "text" "URL"</p>
+<p><em>alias:</em> _button "text" "URL"</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1"></a><span class="ex">send_button</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;Awesome Deals!&quot;</span> <span class="st">&quot;Visit my Shop&quot;</span> <span class="st">&quot;https://dealz.rrr.de&quot;</span></span></code></pre></div>
+<h3>Inline buttons</h3>
+<p>Functions to send/edit messages with with some buttons attached.</p>
+<h5>send_inline_buttons</h5>
+<p><code>senbd_inline_buttons</code> sends a message with multiple buttons attached. Buttons can be an URL or a CALLBACK button. By default all buttons are displayed on one row, an empty string <code>""</code> starts a new row.</p>
+<p><em>usage:</em> send_inline_buttons "CHAT[ID]" "text|url" "text|url" "" "url" "" "text|url" ...</p>
+<p>URL buttons are specified as a <code>"text|url"</code> pair separated by <code>|</code>, <code>text</code> is shown on the button and <code>url</code> is opened on button click. If <code>"url"</code> without text is given, <code>url</code> is shown on the button and opened on button click.</p>
+<p><em>Important</em> An <code>url</code> not startung with http(s):// or tg:// will create a <a href="https://core.telegram.org/bots/2-0-intro#callback-buttons">CALLBACK Button</a>.</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># one button, same as send_button</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="ex">send_inline_buttons</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;Best Dealz!&quot;</span> <span class="st">&quot;Visit my Shop|https://dealz.rrr.de&quot;</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="co"># result</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a>   <span class="ex">Best</span> Dealz!</span>
+<span id="cb12-6"><a href="#cb12-6"></a>  <span class="ex">+----------------------------+</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a>  <span class="kw">|</span>       <span class="ex">Visit</span> my Shop        <span class="kw">|</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a>  <span class="ex">+----------------------------+</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a></span>
+<span id="cb12-10"><a href="#cb12-10"></a><span class="co"># one button row</span></span>
+<span id="cb12-11"><a href="#cb12-11"></a><span class="ex">send_inline_buttons</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;message&quot;</span> <span class="st">&quot;Button 1|http://rrr.de&quot;</span> <span class="st">&quot;Button 2|http://rrr.de&quot;</span></span>
+<span id="cb12-12"><a href="#cb12-12"></a></span>
+<span id="cb12-13"><a href="#cb12-13"></a><span class="co"># result</span></span>
+<span id="cb12-14"><a href="#cb12-14"></a>   <span class="ex">message</span> ...</span>
+<span id="cb12-15"><a href="#cb12-15"></a>  <span class="ex">+----------------------------+</span></span>
+<span id="cb12-16"><a href="#cb12-16"></a>  <span class="kw">|</span>   <span class="ex">Button</span> 1  <span class="kw">|</span>   <span class="ex">Button</span> 2   <span class="kw">|</span></span>
+<span id="cb12-17"><a href="#cb12-17"></a>  <span class="ex">+----------------------------+</span></span>
+<span id="cb12-18"><a href="#cb12-18"></a></span>
+<span id="cb12-19"><a href="#cb12-19"></a><span class="co"># multiple button rows</span></span>
+<span id="cb12-20"><a href="#cb12-20"></a><span class="ex">send_inline_buttons</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;message&quot;</span> <span class="st">&quot;Button 1|http://rrr.de&quot;</span> <span class="st">&quot;Button 2|http://rrr.de&quot;</span> <span class="st">&quot;&quot;</span> <span class="st">&quot;Button on second row|http://rrr.de&quot;</span></span>
+<span id="cb12-21"><a href="#cb12-21"></a></span>
+<span id="cb12-22"><a href="#cb12-22"></a><span class="co"># result</span></span>
+<span id="cb12-23"><a href="#cb12-23"></a>   <span class="ex">message</span> ...</span>
+<span id="cb12-24"><a href="#cb12-24"></a>  <span class="ex">+----------------------------+</span></span>
+<span id="cb12-25"><a href="#cb12-25"></a>  <span class="kw">|</span>   <span class="ex">Button</span> 1  <span class="kw">|</span>   <span class="ex">Button</span> 2   <span class="kw">|</span></span>
+<span id="cb12-26"><a href="#cb12-26"></a>  <span class="kw">|</span><span class="ex">----------------------------</span><span class="kw">|</span></span>
+<span id="cb12-27"><a href="#cb12-27"></a>  <span class="kw">|</span>   <span class="ex">Button</span> on second row     <span class="kw">|</span></span>
+<span id="cb12-28"><a href="#cb12-28"></a>  <span class="ex">+----------------------------+</span></span>
+<span id="cb12-29"><a href="#cb12-29"></a></span></code></pre></div>
+<h5>edit_inline_buttons</h5>
+<p><code>edit_inline_buttons</code> add inline buttons to existing messages, existing inline buttons will be replaced. Only the attached buttons will be changed, not the message.</p>
+<p><em>usage:</em> edit_inline_buttons "CHAT[ID]" "MESSAGE[ID]" "text|url" "text|url" ...</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># message without button</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="ex">send_markdownv2_message</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;*HI* this is a _markdown_ message ...&quot;</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="bu">echo</span> <span class="va">${BOTSEND[ID]}</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="ex">567</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="co"># add one button row</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a><span class="ex">edit_inline_keyboard</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;567&quot;</span> <span class="st">&quot;button 1|http://rrr.de&quot;</span> <span class="st">&quot;button 2|http://rrr.de&quot;</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a></span>
+<span id="cb13-9"><a href="#cb13-9"></a><span class="co"># change buttons</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a><span class="ex">edit_inline_keyboard</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;567&quot;</span> <span class="st">&quot;Success edit_inline_keyboard|http://rrr.de&quot;</span></span>
+<span id="cb13-11"><a href="#cb13-11"></a></span>
+<span id="cb13-12"><a href="#cb13-12"></a><span class="co"># delete button by replace whole message</span></span>
+<span id="cb13-13"><a href="#cb13-13"></a><span class="ex">edit_markdownv2_message</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;*HI* this is a _markdown_ message inline *removed*...&quot;</span></span>
+<span id="cb13-14"><a href="#cb13-14"></a></span></code></pre></div>
+<h5>answer_callback_query</h5>
+<p>Each request send from a CALLBACK button must be answered by a call to <code>answer_callback_query</code>. If alert is given an alert will be shown by the Telegram client instead of a notification.</p>
+<p><em>usage:</em> answer_callback_query "iBUTTON[ID]" "text notification ..." ["alert"]</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1"></a><span class="ex">answer_callback_query</span> <span class="st">&quot;</span><span class="va">${iBUTTON[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;Button data is: </span><span class="va">${iBUTTON[DATA]}</span><span class="st">&quot;</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="ex">answer_callback_query</span> <span class="st">&quot;</span><span class="va">${iBUTTON[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;Alert: Button pressed!&quot;</span> <span class="st">&quot;alert&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># CALLBACK button example</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="ex">send_inline_buttons</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;Press Button ...&quot;</span> <span class="st">&quot;   Button   |RANDOM-BUTTON&quot;</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="co"># result</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a>   <span class="ex">Press</span> Button ...</span>
+<span id="cb15-6"><a href="#cb15-6"></a>  <span class="ex">+----------------------------+</span></span>
+<span id="cb15-7"><a href="#cb15-7"></a>  <span class="kw">|</span>         <span class="ex">Button</span>             <span class="kw">|</span></span>
+<span id="cb15-8"><a href="#cb15-8"></a>  <span class="ex">+----------------------------+</span></span>
+<span id="cb15-9"><a href="#cb15-9"></a></span>
+<span id="cb15-10"><a href="#cb15-10"></a><span class="co"># react on button press from mycommands</span></span>
+<span id="cb15-11"><a href="#cb15-11"></a>   <span class="va">CALLBACK=</span><span class="st">&quot;1&quot;</span> <span class="co"># enable callbacks</span></span>
+<span id="cb15-12"><a href="#cb15-12"></a><span class="ex">...</span></span>
+<span id="cb15-13"><a href="#cb15-13"></a>   <span class="fu">mycallbacks()</span> <span class="kw">{</span></span>
+<span id="cb15-14"><a href="#cb15-14"></a>    <span class="bu">local</span> <span class="va">answer</span></span>
+<span id="cb15-15"><a href="#cb15-15"></a>    <span class="co">#######################</span></span>
+<span id="cb15-16"><a href="#cb15-16"></a>    <span class="co"># callbacks from buttons attached to messages will be  processed here</span></span>
+<span id="cb15-17"><a href="#cb15-17"></a>    <span class="kw">if</span><span class="bu"> [</span> <span class="st">&quot;</span><span class="va">${iBUTTON[DATA]}</span><span class="st">&quot;</span> <span class="ot">=</span> <span class="st">&quot;RANDOM-BUTTON&quot;</span><span class="bu"> ]</span>; <span class="kw">then</span></span>
+<span id="cb15-18"><a href="#cb15-18"></a>        <span class="va">answer=</span><span class="st">&quot;Button pressed&quot;</span></span>
+<span id="cb15-19"><a href="#cb15-19"></a>        <span class="ex">edit_inline_buttons</span> <span class="st">&quot;</span><span class="va">${iBUTTON[CHAT_ID]}</span><span class="st">&quot;</span> <span class="st">&quot;</span><span class="va">${iBUTTON[MESSAGE_ID]}</span><span class="st">&quot;</span> <span class="st">&quot; Button </span><span class="va">${RANDOM}</span><span class="st">|RANDOM-BUTTON&quot;</span></span>
+<span id="cb15-20"><a href="#cb15-20"></a>    <span class="kw">fi</span></span>
+<span id="cb15-21"><a href="#cb15-21"></a></span>
+<span id="cb15-22"><a href="#cb15-22"></a>    <span class="co"># Telegram needs an ack each callback query, default empty</span></span>
+<span id="cb15-23"><a href="#cb15-23"></a>    <span class="ex">answer_callback_query</span> <span class="st">&quot;</span><span class="va">${iBUTTON[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;</span><span class="va">${answer}</span><span class="st">&quot;</span></span>
+<span id="cb15-24"><a href="#cb15-24"></a>    ;;</span>
+<span id="cb15-25"><a href="#cb15-25"></a>   <span class="kw">}</span></span>
+<span id="cb15-26"><a href="#cb15-26"></a></span>
+<span id="cb15-27"><a href="#cb15-27"></a><span class="co"># result, XXXXX: random number changed on each press</span></span>
+<span id="cb15-28"><a href="#cb15-28"></a>   <span class="ex">Press</span> Button ...</span>
+<span id="cb15-29"><a href="#cb15-29"></a>  <span class="ex">+----------------------------+</span></span>
+<span id="cb15-30"><a href="#cb15-30"></a>  <span class="kw">|</span>      <span class="ex">Button</span>  XXXXXX        <span class="kw">|</span></span>
+<span id="cb15-31"><a href="#cb15-31"></a>  <span class="ex">+----------------------------+</span></span>
+<span id="cb15-32"><a href="#cb15-32"></a></span></code></pre></div>
+<hr />
+<h4>Inline keyboards</h4>
+<p>Functions to send/edit more complex button layouts (keyboards), I suggest to start with the simpler inline buttons above.</p>
+<h5>_button_row</h5>
+<p><code>_button_row</code> is a helper function to specify a keyboard row in the form "text|url" pairs. Internally used by inline buttons also.</p>
+<p><em>usage:</em> _button_row "text|url" "text|url" "url" "text|url" ...</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># similar to send_button</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="ex">send_inline_keyboard</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;Best Dealz!&quot;</span> <span class="st">&quot;</span><span class="va">$(</span><span class="ex">_button_row</span> <span class="st">&quot;Visit my Shop|https://dealz.rrr.de&quot;</span><span class="va">)</span><span class="st">&quot;</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a></span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="co"># similar to send_inline_button</span></span>
+<span id="cb16-5"><a href="#cb16-5"></a><span class="ex">send_inline_keyboard</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;message&quot;</span> <span class="st">&quot;</span><span class="va">$(</span><span class="ex">_button_row</span> <span class="st">&quot;button 1|http://rrr.de&quot;</span> <span class="st">&quot;button 2|http://rrr.de&quot;</span><span class="va">)</span><span class="st">&quot;</span></span>
+<span id="cb16-6"><a href="#cb16-6"></a></span>
+<span id="cb16-7"><a href="#cb16-7"></a><span class="co"># multiple button rows</span></span>
+<span id="cb16-8"><a href="#cb16-8"></a><span class="ex">send_inline_keyboard</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;message&quot;</span> <span class="st">&quot;</span><span class="va">$(</span><span class="ex">_button_row</span> <span class="st">&quot;b1|http://rrr.de&quot;</span> <span class="st">&quot;b2|http://rrr.de&quot;</span> <span class="st">&quot;&quot;</span> <span class="st">&quot;b3|http://rrr.de&quot;</span> <span class="st">&quot;b4|http://rrr.de&quot;</span><span class="va">)</span><span class="st">&quot;</span></span></code></pre></div>
+<h5>send_inline_keyboard</h5>
+<p><code>send_inline_keyboard</code> sends a message with keyboards attached, keyboards must be specified in JSON format.</p>
+<p><em>usage:</em> send_inline_keyboard "CHAT[ID]" "message" "[JSON button array]"</p>
+<p>I suggest to use <code>_button_row</code> to create the used JSON. For hand crafted JSON the following format must be used, see <a href="https://core.telegram.org/bots/api#inlinekeyboardmarkup">Inline Keyboard Markup</a></p>
+<p>URL <code>[ {"text":"text1", "url":"url1"}, ... {"text":"textN", "url":"urlN"} ],[...]</code><br />
+CALLBACK <code>[ {"text":"text1", "callback_data":"abc"}, ... {"text":"textN", "callback_data":"defg"} ],[...]</code><br />
+An URL Button opens the given URL, a CALLBACK button sends an update the bot must react on.</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># send_button</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="ex">send_inline_keyboard</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;Best Dealz!&quot;</span> <span class="st">&#39;[{&quot;text&quot;:&quot;Visit my Shop&quot;, &quot;url&quot;:&quot;https://dealz.rrr.de&quot;}]&#39;</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a></span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="co"># send_inline_button</span></span>
+<span id="cb17-5"><a href="#cb17-5"></a><span class="ex">send_inline_keyboard</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;message&quot;</span> <span class="st">&#39;[{&quot;text&quot;:&quot;button 1&quot;, url&quot;&quot;:&quot;http://rrr.de&quot;}, {&quot;text&quot;:&quot;button 2&quot;, &quot;url&quot;:&quot;http://rrr.de&quot;} ]&#39;</span></span>
+<span id="cb17-6"><a href="#cb17-6"></a></span>
+<span id="cb17-7"><a href="#cb17-7"></a><span class="co"># multiple button rows</span></span>
+<span id="cb17-8"><a href="#cb17-8"></a><span class="ex">send_inline_keyboard</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;message&quot;</span> <span class="st">&#39;[{&quot;text&quot;:&quot;b1&quot;, &quot;url&quot;:&quot;http://rrr.de&quot;}, {&quot;text&quot;:&quot;b2&quot;, &quot;url&quot;:&quot;http://rrr.de&quot;}], [{&quot;text&quot;:&quot;b3&quot;, &quot;url&quot;:&quot;http://rrr.de&quot;}, &quot;text&quot;:&quot;b4&quot;, &quot;url&quot;:&quot;http://rrr.de&quot;}]&#39;</span></span>
+<span id="cb17-9"><a href="#cb17-9"></a></span>
+<span id="cb17-10"><a href="#cb17-10"></a><span class="co"># more complex keyboard, note the ,</span></span>
+<span id="cb17-11"><a href="#cb17-11"></a><span class="va">keyboard_text=</span><span class="st">&quot;Deal-O-Mat public groups ...&quot;</span></span>
+<span id="cb17-12"><a href="#cb17-12"></a><span class="va">keyboard_json=</span><span class="st">&quot;</span><span class="va">$(</span><span class="ex">_button_row</span> <span class="st">&quot;🤖 #Home of Deal-O-Mat Bot 🤖|https://dealz.rrr.de/dealzbot.html&quot;</span><span class="va">)</span></span>
+<span id="cb17-13"><a href="#cb17-13"></a><span class="st">, </span><span class="va">$(</span><span class="ex">_button_row</span> <span class="st">&quot;Amazon DE|https://t.me/joinchat/IvvRtlxxxxx&quot;</span> <span class="st">&quot;Home &amp; Family|https://t.me/joinchat/VPh_wexxxxx&quot;</span><span class="va">)</span></span>
+<span id="cb17-14"><a href="#cb17-14"></a><span class="st">, </span><span class="va">$(</span><span class="ex">_button_row</span> <span class="st">&quot;Amz International |https://t.me/joinchat/IvvRtkxxxxx&quot;</span> <span class="st">&quot;Amazon WHD|https://t.me/joinchat/IvvRxxxxx&quot;</span><span class="va">)</span></span>
+<span id="cb17-15"><a href="#cb17-15"></a><span class="st">, </span><span class="va">$(</span><span class="ex">_button_row</span> <span class="st">&quot;Smartphones|https://t.me/joinchat/IvvRthtqxxxxx&quot;</span> <span class="st">&quot;Gaming|https://t.me/joinchat/IvvRthRyrsmxxxxx&quot;</span><span class="va">)</span></span>
+<span id="cb17-16"><a href="#cb17-16"></a><span class="st">, </span><span class="va">$(</span><span class="ex">_button_row</span> <span class="st">&quot;Accessoires|https://t.me/joinchat/IvvRthlJxxxxx&quot;</span> <span class="st">&quot;eBay|https://t.me/joinchat/IvvRthxxxxx&quot;</span><span class="va">)</span></span>
+<span id="cb17-17"><a href="#cb17-17"></a><span class="st">, </span><span class="va">$(</span><span class="ex">_button_row</span> <span class="st">&quot;!! Offtopic Discussions !!|https://t.me/joinchat/IvvRthRhxxxxx-pZrWw&quot;</span><span class="va">)</span></span>
+<span id="cb17-18"><a href="#cb17-18"></a><span class="st">, </span><span class="va">$(</span><span class="ex">_button_row</span> <span class="st">&quot;Deals &gt;100|https://t.me/joinchat/IvvRtxxxxx&quot;</span> <span class="st">&quot;Leasing|https://t.me/joinchat/IvvRthRbxxxxx&quot;</span><span class="va">)</span></span>
+<span id="cb17-19"><a href="#cb17-19"></a><span class="st">, </span><span class="va">$(</span><span class="ex">_button_row</span> <span class="st">&quot;Deals &gt;1000|https://t.me/joinchat/IvvRtlxxxxx&quot;</span> <span class="st">&quot;Deals &gt;500|https://t.me/joinchat/IvvRthvbHxxxxx&quot;</span><span class="va">)</span></span>
+<span id="cb17-20"><a href="#cb17-20"></a></span>
+<span id="cb17-21"><a href="#cb17-21"></a><span class="st">send_inline_keyboard &quot;</span>CHAT[<span class="ex">ID</span>]<span class="st">&quot; &quot;</span><span class="va">${keyboard_text}</span><span class="st">&quot; &quot;</span><span class="va">${keyboard_json}</span><span class="st">&quot;</span></span>
+<span id="cb17-22"><a href="#cb17-22"></a></span>
+<span id="cb17-23"><a href="#cb17-23"></a><span class="st"># result</span></span>
+<span id="cb17-24"><a href="#cb17-24"></a><span class="st">  +---------------------------------+</span></span>
+<span id="cb17-25"><a href="#cb17-25"></a><span class="st">  |  🤖 #Home of Deal-O-Mat Bot 🤖  |</span></span>
+<span id="cb17-26"><a href="#cb17-26"></a><span class="st">  |---------------------------------|</span></span>
+<span id="cb17-27"><a href="#cb17-27"></a><span class="st">  |    Amazon DE   | Home &amp; Family  |</span></span>
+<span id="cb17-28"><a href="#cb17-28"></a><span class="st">  |----------------|----------------|</span></span>
+<span id="cb17-29"><a href="#cb17-29"></a><span class="st">  |  Amz Internat  |   Amazon WHD   |</span></span>
+<span id="cb17-30"><a href="#cb17-30"></a><span class="st">  |----------------|----------------|</span></span>
+<span id="cb17-31"><a href="#cb17-31"></a><span class="st">  |  Smartphones   |     Gaming     |</span></span>
+<span id="cb17-32"><a href="#cb17-32"></a><span class="st">  |----------------|----------------|</span></span>
+<span id="cb17-33"><a href="#cb17-33"></a><span class="st">  |  Accessoires   |     eBay       |</span></span>
+<span id="cb17-34"><a href="#cb17-34"></a><span class="st">  |---------------------------------|</span></span>
+<span id="cb17-35"><a href="#cb17-35"></a><span class="st">  |   !!  Offtopic Discussions !!   |</span></span>
+<span id="cb17-36"><a href="#cb17-36"></a><span class="st">  |---------------------------------|</span></span>
+<span id="cb17-37"><a href="#cb17-37"></a><span class="st">  |   Deals &gt;100   |    Leasing     |</span></span>
+<span id="cb17-38"><a href="#cb17-38"></a><span class="st">  |----------------|----------------|</span></span>
+<span id="cb17-39"><a href="#cb17-39"></a><span class="st">  |  Deals &gt;1000   |   Deals &gt;500   |</span></span>
+<span id="cb17-40"><a href="#cb17-40"></a><span class="st">  +---------------------------------+</span></span>
+<span id="cb17-41"><a href="#cb17-41"></a></span></code></pre></div>
+<p><em>See also <a href="https://core.telegram.org/bots/api/#inlinekeyboardmarkup">Inline keyboard markup</a></em></p>
+<h5>edit_inline_keyboard</h5>
+<p><code>edit_inline_keyboard</code> add inline keyboards to existing messages and replace existing inline keyboards. Only the attached keyboard will be changed, not the message.</p>
+<p><em>usage:</em> edit_inline_keyboard "CHAT[ID]" "MESSAGE[ID]" "[JSON button array]"</p>
+<p>To create a JSON button array I suggest to use <code>_button_row</code>.</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># message without button</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="ex">send_markdownv2_message</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;*HI* this is a _markdown_ message ...&quot;</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="bu">echo</span> <span class="va">${BOTSEND[ID]}</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="ex">567</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a></span>
+<span id="cb18-6"><a href="#cb18-6"></a><span class="co"># add one button row with help of _button_row</span></span>
+<span id="cb18-7"><a href="#cb18-7"></a><span class="ex">edit_inline_keyboard</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;567&quot;</span> <span class="st">&quot;</span><span class="va">$(</span><span class="ex">_button_row</span> <span class="st">&quot;button 1|http://rrr.de&quot;</span> <span class="st">&quot;button 2|http://rrr.de&quot;</span><span class="va">)</span><span class="st">&quot;</span></span>
+<span id="cb18-8"><a href="#cb18-8"></a></span>
+<span id="cb18-9"><a href="#cb18-9"></a><span class="co"># change buttons with help of _button_row</span></span>
+<span id="cb18-10"><a href="#cb18-10"></a><span class="ex">edit_inline_keyboard</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;567&quot;</span> <span class="st">&quot;</span><span class="va">$(</span><span class="ex">_button_row</span> <span class="st">&quot;Success edit_inline_keyboard|http://rrr.de&quot;</span><span class="va">)</span><span class="st">&quot;</span></span>
+<span id="cb18-11"><a href="#cb18-11"></a></span>
+<span id="cb18-12"><a href="#cb18-12"></a><span class="co"># delete button by replace whole message</span></span>
+<span id="cb18-13"><a href="#cb18-13"></a><span class="ex">edit_markdownv2_message</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;*HI* this is a _markdown_ message inline *removed*...&quot;</span></span>
+<span id="cb18-14"><a href="#cb18-14"></a></span></code></pre></div>
+<hr />
+<h3>Edit / Replace Messages</h3>
+<p>Edit a message means replace the content of the message in place. The message stay on the same position in the chat and keep the same message id. If new message is the same than current message Telegram return error 400 with description "Bad Request: chat message is not modified"</p>
+<p>There is no need to use the same format when replace a message, e.g. a message sent with <code>send_normal_message</code> can be replaced with <code>edit_markdown_message</code> or <code>edit_html_message</code> and vice versa.</p>
+<p>To replace a message you must know the message id of the the original message. The best way to get the message id is to save the value of <code>BOTSENT[ID]</code> after sending the original message.</p>
+<h5>edit_normal_message</h5>
+<p><code>edit_normal_message</code> replace a message with a text message in the given chat.</p>
+<p><em>usage:</em> edit_normal_message "CHAT[ID]" "MESSAGE-ID" "message"</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1"></a><span class="ex">send_normal_message</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;this is a text message&quot;</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="ex">saved-id</span>=<span class="st">&quot;</span><span class="va">${BOTSENT[ID]}</span><span class="st">&quot;</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a></span>
+<span id="cb19-4"><a href="#cb19-4"></a><span class="ex">edit_normal_message</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;</span><span class="va">${saved-</span>id<span class="va">}</span><span class="st">&quot;</span> <span class="st">&quot;this is another text&quot;</span></span></code></pre></div>
+<h5>edit_markdownv2_message</h5>
+<p><code>edit_markdownv2_message</code> replace a message with a markdown v2 message in the given chat.</p>
+<p><em>usage:</em> edit_markdownv2_message "CHAT[ID]" "MESSAGE-ID" "message"</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1"></a><span class="ex">send_normal_message</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;this is a text message&quot;</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="ex">saved-id</span>=<span class="st">&quot;</span><span class="va">${BOTSENT[ID]}</span><span class="st">&quot;</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a></span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="ex">edit_markdownv2_message</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;</span><span class="va">${saved-</span>id<span class="va">}</span><span class="st">&quot;</span> <span class="st">&quot;this is __markdown__ *V2* text&quot;</span></span></code></pre></div>
+<h5>edit_markdown_message</h5>
+<p><code>edit_markdown_message</code> replace a message with a markdown message in the given chat.</p>
+<p><em>usage:</em> edit_markdown_message "CHAT[ID]" "MESSAGE-ID" "message"</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1"></a><span class="ex">send_normal_message</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;this is a text message&quot;</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="ex">saved-id</span>=<span class="st">&quot;</span><span class="va">${BOTSENT[ID]}</span><span class="st">&quot;</span></span>
+<span id="cb21-3"><a href="#cb21-3"></a></span>
+<span id="cb21-4"><a href="#cb21-4"></a><span class="ex">edit_markdown_message</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;</span><span class="va">${saved-</span>id<span class="va">}</span><span class="st">&quot;</span> <span class="st">&quot;this is *markdown* text&quot;</span></span></code></pre></div>
+<h5>edit_html_message</h5>
+<p><code>edit_html_message</code> replace a message with a html message in the given chat.</p>
+<p><em>usage:</em> edit_html_message "CHAT[ID]" "MESSAGE-ID" "message"</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1"></a><span class="ex">send_normal_message</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;this is a text message&quot;</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="ex">saved-id</span>=<span class="st">&quot;</span><span class="va">${BOTSENT[ID]}</span><span class="st">&quot;</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a></span>
+<span id="cb22-4"><a href="#cb22-4"></a><span class="ex">edit_html_message</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;</span><span class="va">${saved-</span>id<span class="va">}</span><span class="st">&quot;</span> <span class="st">&quot;this is &lt;b&gt;html&lt;/b&gt; text&quot;</span></span></code></pre></div>
+<h5>edit_message_caption</h5>
+<p><code>edit_message_caption</code> changes the caption of a message (photo, audio, video, document) in the given chat.</p>
+<p><em>usage:</em> edit_message_caption "CHAT[ID]" "MESSAGE-ID" "caption"</p>
+<hr />
+<h3>Get files from Telegram</h3>
+<h5>download_file</h5>
+<p><code>download_file</code> download a file to <code>DATADIR</code> and returns the local <code>path</code> to the file on disc, main use is to download files send to chats. I tried to be as compatible as possible with old function <code>download</code>.</p>
+<p><em>usage:</em> download_file path_to_ile prosed_filename</p>
+<p><em>alias</em>: download</p>
+<p><em>Note:</em> You must use <code>download_file</code> to download <code>URLS[...]</code> or <code>SERVICE[NEWPHOTO]</code> URLs from Telegram server.</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1"></a><span class="co">########</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="co"># download from Telegram server</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a><span class="co"># photo received in a chat</span></span>
+<span id="cb23-4"><a href="#cb23-4"></a><span class="va">photo=</span><span class="st">&quot;</span><span class="va">${URLS[PHOTO]}</span><span class="st">&quot;</span>)<span class="st">&quot;</span></span>
+<span id="cb23-5"><a href="#cb23-5"></a><span class="st">echo &quot;</span><span class="va">$photo</span><span class="st">&quot; -&gt; photo/file_1234.jpg</span></span>
+<span id="cb23-6"><a href="#cb23-6"></a></span>
+<span id="cb23-7"><a href="#cb23-7"></a><span class="st"># first download</span></span>
+<span id="cb23-8"><a href="#cb23-8"></a><span class="st">file=&quot;</span><span class="va">$(</span><span class="ex">download_file</span> <span class="st">&quot;</span><span class="va">${photo}</span><span class="st">&quot;</span></span>
+<span id="cb23-9"><a href="#cb23-9"></a><span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$file</span><span class="st">&quot;</span> -<span class="op">&gt;</span> ./data-bot-bash/photo-file_1234.jpg</span>
+<span id="cb23-10"><a href="#cb23-10"></a></span>
+<span id="cb23-11"><a href="#cb23-11"></a><span class="co"># second download</span></span>
+<span id="cb23-12"><a href="#cb23-12"></a><span class="va">file=</span><span class="st">&quot;</span><span class="va">$(</span><span class="ex">download_file</span> <span class="st">&quot;</span><span class="va">${photo}</span><span class="st">&quot;</span></span>
+<span id="cb23-13"><a href="#cb23-13"></a><span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$file</span><span class="st">&quot;</span> -<span class="op">&gt;</span> ./data-bot-bash/jkdfhi-photo-file_1234.jpg</span>
+<span id="cb23-14"><a href="#cb23-14"></a></span>
+<span id="cb23-15"><a href="#cb23-15"></a><span class="fu">ls</span> data-bot-bash/*.jpg</span>
+<span id="cb23-16"><a href="#cb23-16"></a><span class="ex">photo-file_1234.jpg</span>  jkdfhi-photo-file_1234.jpg</span>
+<span id="cb23-17"><a href="#cb23-17"></a></span>
+<span id="cb23-18"><a href="#cb23-18"></a></span>
+<span id="cb23-19"><a href="#cb23-19"></a><span class="co">########</span></span>
+<span id="cb23-20"><a href="#cb23-20"></a><span class="co"># download from other sources (full URL)</span></span>
+<span id="cb23-21"><a href="#cb23-21"></a><span class="va">file=</span><span class="st">&quot;</span><span class="va">$(</span><span class="ex">download</span> <span class="st">&quot;https://avatars.githubusercontent.com/u/13046303&quot;</span><span class="va">)</span><span class="st">&quot;</span></span>
+<span id="cb23-22"><a href="#cb23-22"></a><span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$file</span><span class="st">&quot;</span> -<span class="op">&gt;</span> ./data-bot-bash/download-askjgftGJGdh1Z</span>
+<span id="cb23-23"><a href="#cb23-23"></a></span>
+<span id="cb23-24"><a href="#cb23-24"></a><span class="va">file=</span><span class="st">&quot;</span><span class="va">$(</span><span class="ex">download</span> <span class="st">&quot;https://avatars.githubusercontent.com/u/13046303&quot;</span> <span class="st">&quot;avatar.jpg&quot;</span><span class="va">)</span><span class="st">&quot;</span></span>
+<span id="cb23-25"><a href="#cb23-25"></a><span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$file</span><span class="st">&quot;</span> -<span class="op">&gt;</span> ./data-bot-bash/avatar.jpg</span>
+<span id="cb23-26"><a href="#cb23-26"></a></span>
+<span id="cb23-27"><a href="#cb23-27"></a><span class="va">file=</span><span class="st">&quot;</span><span class="va">$(</span><span class="ex">download</span> <span class="st">&quot;https://avatars.githubusercontent.com/u/13046303&quot;</span> <span class="st">&quot;avatar.jpg&quot;</span><span class="va">)</span><span class="st">&quot;</span></span>
+<span id="cb23-28"><a href="#cb23-28"></a><span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$file</span><span class="st">&quot;</span> -<span class="op">&gt;</span> ./data-bot-bash/jhsdf-avatar.jpg</span>
+<span id="cb23-29"><a href="#cb23-29"></a></span>
+<span id="cb23-30"><a href="#cb23-30"></a><span class="fu">ls</span> data-bot-bash/</span>
+<span id="cb23-31"><a href="#cb23-31"></a><span class="ex">avatar.jpg</span>  jhsdf-avatar.jpg  download-askjgftGJGdh1Z  </span>
+<span id="cb23-32"><a href="#cb23-32"></a></span>
+<span id="cb23-33"><a href="#cb23-33"></a></span>
+<span id="cb23-34"><a href="#cb23-34"></a><span class="co">#######</span></span>
+<span id="cb23-35"><a href="#cb23-35"></a><span class="co"># manually download files to current directory (not recommended)</span></span>
+<span id="cb23-36"><a href="#cb23-36"></a><span class="ex">getJson</span> <span class="st">&quot;</span><span class="va">${FILEURL}</span><span class="st">/</span><span class="va">${photo}</span><span class="st">&quot;</span> <span class="op">&gt;</span><span class="st">&quot;downloaded_photo.jpg&quot;</span></span>
+<span id="cb23-37"><a href="#cb23-37"></a><span class="ex">getJson</span> <span class="st">&quot;https://avatars.githubusercontent.com/u/13046303&quot;</span> <span class="op">&gt;</span><span class="st">&quot;avatar.jpg&quot;</span></span>
+<span id="cb23-38"><a href="#cb23-38"></a></span>
+<span id="cb23-39"><a href="#cb23-39"></a><span class="fu">ls</span> -F</span>
+<span id="cb23-40"><a href="#cb23-40"></a><span class="ex">JSON.sh/</span> bin/ modules/ data-bot-bash/</span>
+<span id="cb23-41"><a href="#cb23-41"></a><span class="ex">avatar.jpg</span>  bashbot.sh*  botconfig.jssh  commands.sh  count.jssh  downloaded_photo.jpg  mycommands.sh ...</span>
+<span id="cb23-42"><a href="#cb23-42"></a></span></code></pre></div>
+<h5>get_file</h5>
+<p><code>get_file</code> get the <code>path</code> to a file on Telegram server by it's <code>file_id</code>. File <code>path</code> is only valid for use with your bot token.</p>
+<p><em>usage:</em> url="$(get_file "file_id")"</p>
+<p><em>example</em>:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1"></a><span class="co"># download file by file_id</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="va">file_id=</span><span class="st">&quot;kjhdsfhkj-kjshfbsdbfkjhsdkfjn&quot;</span></span>
+<span id="cb24-3"><a href="#cb24-3"></a></span>
+<span id="cb24-4"><a href="#cb24-4"></a><span class="va">path=</span><span class="st">&quot;</span><span class="va">$(</span><span class="ex">get_file</span> <span class="st">&quot;</span><span class="va">${file_id}</span><span class="st">&quot;</span><span class="va">)</span><span class="st">&quot;</span></span>
+<span id="cb24-5"><a href="#cb24-5"></a><span class="va">file=</span><span class="st">&quot;</span><span class="va">$(</span><span class="ex">download_file</span> <span class="st">&quot;</span><span class="va">${path}</span><span class="st">&quot;</span><span class="va">)</span><span class="st">&quot;</span></span>
+<span id="cb24-6"><a href="#cb24-6"></a></span>
+<span id="cb24-7"><a href="#cb24-7"></a><span class="co"># one line</span></span>
+<span id="cb24-8"><a href="#cb24-8"></a><span class="va">file=</span><span class="st">&quot;</span><span class="va">$(</span><span class="ex">download_file</span> <span class="st">&quot;</span><span class="va">$(</span><span class="ex">get_file</span> <span class="st">&quot;</span><span class="va">${file_id}</span><span class="st">&quot;</span><span class="va">)</span><span class="st">&quot;</span><span class="va">)</span><span class="st">&quot;</span></span>
+<span id="cb24-9"><a href="#cb24-9"></a></span></code></pre></div>
+<hr />
+<h3>Manage Group</h3>
+<p>To use the following functions the bot must have administrator status in the chat / group</p>
+<h5>chat_member_count</h5>
+<p><code>chat_member_count</code> returns (putput) number of chat members.</p>
+<p><em>usage:</em> num_members="$(chat_member_count "CHAT[ID]")"</p>
+<h5>set_chat_title</h5>
+<p><code>set_chat_title</code> sets a new chat title. If new title is the same than current title Telegram return error 400 with description "Bad Request: chat title is not modified"</p>
+<p><em>usage:</em> set_chat_title "CHAT[ID]" "new chat title"</p>
+<h5>set_chat_description</h5>
+<p><code>set_chat_description</code> sets a new description title. If new description is the same than current description Telegram return error 400 with description "Bad Request: chat description is not modified"</p>
+<p><em>usage:</em> set_chat_description "CHAT[ID]" "new chat description"</p>
+<h5>set_chat_photo</h5>
+<p><code>set_chat_photo</code> sets a new profile photo for the chat, can't be changed for private chat. Photo must be a local image file in a supported format (<em>.jpg, .jpeg, .png, .gif, .bmp, .tiff</em>)</p>
+<p>Same location and naming restrictions as with <code>send_file</code> apply.</p>
+<p><em>usage:</em> set_chat_photo "CHAT[ID]" "file"</p>
+<h5>new_chat_invite</h5>
+<p><code>new_chat_invite</code> generate a new invite link for a chat; any previously generated link is revoked. Returns the new invite link as String on success.</p>
+<p><em>usage:</em> new_chat_invite "CHAT[ID]"</p>
+<h5>delete_chat_photo</h5>
+<p><em>usage:</em> delete_chat_photo "CHAT[ID]"</p>
+<h5>pin_chat_message</h5>
+<p><code>pin_chat_message</code> add a message to the list of pinned messages in a chat.</p>
+<p><em>usage:</em> pin_chat_message "CHAT[ID]" "message_id"</p>
+<h5>unpin_chat_message</h5>
+<p><code>unpin_chat_message</code> remove a message from the list of pinned messages in a chat.</p>
+<p><em>usage:</em> unpin_chat_message "CHAT[ID]" "message_id"</p>
+<h5>unpinall_chat_message</h5>
+<p><code>unpinall_chat_message</code> clear the list of pinned messages in a chat.</p>
+<p><em>usage:</em> unpinall_chat_message "CHAT[ID]"</p>
+<h5>delete_chat_stickers</h5>
+<p><code>delete_chat_stickers</code> deletes a group sticker set from a supergroup.</p>
+<p><em>usage:</em> delete_chat_stickers "CHAT[ID]"</p>
+<h5>set_chatadmin_title</h5>
+<p><code>set_chatadmin_title</code> set a custom title for an administrator in a supergroup promoted by the bot. Admin title can be 0-16 characters long, emoji are not allowed.</p>
+<p><em>usage:</em> set_chatadmin_title "CHAT[ID]" "USER[ID]" "admin title"</p>
+<hr />
+<h3>User Access Control</h3>
+<p>The following basic user control functions are part of the Telegram API. More advanced API functions are currently not implemented in bashbot.</p>
+<h5>kick_chat_member</h5>
+<p>If your Bot is a chat admin he can kick and ban a user.</p>
+<p><em>usage:</em> kick_chat_member "CHAT[ID]" "USER[ID]"</p>
+<p><em>alias:</em> _kick_user "USER[ID]"</p>
+<h5>unban_chat_member</h5>
+<p>If your Bot is a chat admin can unban a kicked user.</p>
+<p><em>usage:</em> unban_chat_member "CHAT[ID]" "USER[ID]"</p>
+<p><em>alias:</em> _unban "USER[ID]"</p>
+<h5>leave_chat</h5>
+<p>Your Bot will leave the chat.</p>
+<p><em>usage:</em> leave_chat "CHAT[ID]"</p>
+<p><em>alias:</em> _leave</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1"></a><span class="kw">if</span> <span class="ex">bot_is_admin</span> <span class="kw">;</span> <span class="kw">then</span> </span>
+<span id="cb25-2"><a href="#cb25-2"></a> <span class="ex">send_markdown_message</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;*LEAVING CHAT...*&quot;</span></span>
+<span id="cb25-3"><a href="#cb25-3"></a> <span class="ex">leave_chat</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span></span>
+<span id="cb25-4"><a href="#cb25-4"></a><span class="kw">fi</span></span></code></pre></div>
+<p>See also <a href="https://core.telegram.org/bots/api/#kickchatmember">kick Chat Member</a>*</p>
+<h5>promote_chat_member</h5>
+<p><code>promote_chat_member</code> promote or denote user rights in a chat. Bot must be admin and can only promote/denote rights he owns.</p>
+<p>Right are specified as "right:bool" pairs, where right is one of <code>long</code> or <code>short</code> listed below, followed by <code>:true</code> or <code>:false</code>. Anything but <code>:true</code> (e.g. nothing or :xyz) is <code>:false</code>.</p>
+<p>long: <code>is_anonymous can_change_info can_post_messages can_edit_messages can_delete_messages can_invite_users can_restrict_members can_pin_messages can_promote_member</code> short: <code>anon change post edit delete invite restrict pin promote</code></p>
+<p><em>usage:</em> promote_chat_member "CHAT[ID]" "USER[ID]" "right[:true|false]" ... "right[:true|false]"</p>
+<p>See also <a href="https://core.telegram.org/bots/api#promotechatmember">promote Chat Member</a>*</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1"></a><span class="co">#                                 USER      can post,      can&#39;t edit,     can&#39;t delete, can&#39;t pin message, can invite users</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a><span class="ex">promote_chat_member</span> <span class="st">&quot;CHAT[ID}&quot;</span> <span class="st">&quot;USER[ID]&quot;</span> <span class="st">&quot;post:true&quot;</span>  <span class="st">&quot;can_edit_message&quot;</span> <span class="st">&quot;delete:false&quot;</span>   <span class="st">&quot;pin:xxx&quot;</span>        <span class="st">&quot;invite:true&quot;</span></span></code></pre></div>
+<hr />
+<p>The following functions are bashbot only and not part of the Telegram API.</p>
+<h5>bot_is_admin</h5>
+<p>Return true (0) if bot is admin or creator of given chat.</p>
+<p><em>usage:</em> bot_is_admin "CHAT[ID]"</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1"></a><span class="kw">if</span> <span class="ex">bot_is_admin</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span><span class="kw">;</span> <span class="kw">then</span> </span>
+<span id="cb27-2"><a href="#cb27-2"></a>  <span class="ex">send_markdown_message</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;*I&#39;m admin...*&quot;</span></span>
+<span id="cb27-3"><a href="#cb27-3"></a><span class="kw">fi</span></span></code></pre></div>
+<h5>user_is_botadmin</h5>
+<p>Return true (0) if user is admin of bot, user id if botadmin is read from file './botadmin'.</p>
+<p><em>usage:</em> user_is_botadmin "USER[ID]"</p>
+<p><em>alias:</em> _is_botadmin</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1"></a><span class="ex">user_is_botadmin</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="kw">&amp;&amp;</span> <span class="ex">send_markdown_message</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;You are *BOTADMIN*.&quot;</span></span></code></pre></div>
+<h5>user_is_creator</h5>
+<p>Return true (0) if user is creator of given chat or chat is a private chat.</p>
+<p><em>usage:</em> user_is_creator "CHAT[ID]" "USER[ID]"</p>
+<p><em>alias:</em> _is_creator</p>
+<h5>user_is_admin</h5>
+<p>Return true (0) if user is admin or creator of given chat.</p>
+<p><em>usage:</em> user_is_admin "CHAT[ID]" "USER[ID]"</p>
+<p><em>alias:</em> _is_admin</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1"></a><span class="kw">if</span> <span class="ex">user_is_admin</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="kw">;</span> <span class="kw">then</span> </span>
+<span id="cb29-2"><a href="#cb29-2"></a>  <span class="ex">send_markdown_message</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;*LEAVING CHAT...*&quot;</span></span>
+<span id="cb29-3"><a href="#cb29-3"></a>  <span class="ex">leave_chat</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span></span>
+<span id="cb29-4"><a href="#cb29-4"></a><span class="kw">fi</span></span></code></pre></div>
+<p><em>See also <a href="https://core.telegram.org/bots/api/#chatmember">Chat Member</a></em></p>
+<h5>user_is_allowed</h5>
+<p><code>uers_is_allowed</code> checks if: user id botadmin, user is group admin or user is allowed to execute action.. Allowed actions are configured as User Access Control rules, see <a href="3_advanced.html">Advanced Usage</a></p>
+<p><em>usage:</em> user_is_allowed "USER[ID]" "action" "CHAT[ID]"</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1"></a><span class="kw">if</span> ! <span class="ex">user_is_allowed</span> <span class="st">&quot;</span><span class="va">${USER[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;start&quot;</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="kw">;</span> <span class="kw">then</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a>  <span class="ex">send_normal_message</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;You are not allowed to start Bot.&quot;</span></span>
+<span id="cb30-3"><a href="#cb30-3"></a><span class="kw">fi</span></span></code></pre></div>
+<hr />
+<h3>Inline Query</h3>
+<p>Inline Queries allows users to interact with your bot directly without sending extra commands. As an answer to an inline query you can send back one or more results to the Telegram client. The Telegram client will then show the results to the user and let him select one.</p>
+<h5>answer_inline_query</h5>
+<p>answer_inline_query is provided for backward compatibility with older versions of bashbot. It send back only one response to an inline query.</p>
+<p><em>usage:</em> answer_inline_query "$i{QUERY[ID]}" "type" "type arg 1" ... "type arg n"</p>
+<p><em>example:</em> - see <a href="3_advanced.html">Advanced Usage</a></p>
+<h5>answer_inline_multi</h5>
+<p>anwser_inline_multi allows you to send back a list of responses. Responses must be separated by ','.</p>
+<p><em>usage:</em> answer_inline_multi "${iQUERY[ID]}" "res, res, ... res"</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1"></a><span class="co"># note the starting &quot; and ending &quot; !!</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a><span class="ex">answer_inline_multi</span> <span class="st">&quot;</span><span class="va">${iQUERY[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;</span></span>
+<span id="cb31-3"><a href="#cb31-3"></a><span class="st">    </span><span class="va">$(</span><span class="ex">inline_query_compose</span> <span class="st">&quot;1&quot;</span> <span class="st">&quot;photo&quot;</span> <span class="st">&quot;https://avatars0.githubusercontent.com/u/13046303&quot;</span><span class="va">)</span><span class="st"> ,</span></span>
+<span id="cb31-4"><a href="#cb31-4"></a><span class="st">    ...</span></span>
+<span id="cb31-5"><a href="#cb31-5"></a><span class="st">    </span><span class="va">$(</span><span class="ex">inline_query_compose</span> <span class="st">&quot;n&quot;</span> <span class="st">&quot;photo&quot;</span> <span class="st">&quot;https://avatars1.githubusercontent.com/u/4593242&quot;</span><span class="va">)</span></span>
+<span id="cb31-6"><a href="#cb31-6"></a><span class="st">    &quot;</span></span></code></pre></div>
+<h5>inline_query_compose</h5>
+<p>inline_query_compose composes one response element to to send back.</p>
+<p><em>usage:</em> inline_query_compose ID type args ....</p>
+<pre><code>    ID = unique ID for this response, 1-64 byte long
+    type = type of answer, e.g. article, photo, video, location ...
+    args = mandatory arguments in the order they are described in telegram documentation
+</code></pre>
+<p>Currently the following types and arguments are implemented (optional arguments in parenthesis)</p>
+<pre><code>    &quot;article&quot;|&quot;message&quot; title message (parse_mode description)
+
+    &quot;photo&quot;         photo_URL (thumb_URL title description caption parse_mode keyboard)
+    &quot;gif&quot;           photo_URL (thumb_URL title caption parse_mode keyboard)
+    &quot;mpeg4_gif&quot;     mpeg_URL (thumb_URL title caption  parse_mode keyboard)
+    &quot;video&quot;         video_URL mime_type thumb_URL title (caption parse_mode keyboard)
+    &quot;audio&quot;         audio_URL title (caption parse_mode keyboard)
+    &quot;voice&quot;         voice_URL title (caption parse_mode keyboard)
+    &quot;document&quot;      title document_URL mime_type (caption description parse_mode)
+
+    &quot;location&quot;      latitude longitude title
+    &quot;venue&quot;         latitude longitude title (address foursquare)
+    &quot;contact&quot;       phone first (last thumb)
+
+    &quot;cached_photo&quot;      file (title description caption parse_mode keyboard)
+    &quot;cached_gif&quot;        file (title caption parse_mode keyboard)
+    &quot;cached_mpeg4_gif&quot;  file (title caption parse_mode keyboard)
+    &quot;cached_sticker&quot;    file (keyboard)
+    &quot;cached_document&quot;   title file (description caption description parse_mode keyboard)
+    &quot;cached_video&quot;      file title (description caption description parse_mode keyboard)
+    &quot;cached_voice&quot;      file title (caption parse_mode keyboard)
+    &quot;cached_audio&quot;      file title (caption parse_mode keyboard)
+</code></pre>
+<p>see <a href="https://core.telegram.org/bots/api#inlinequeryresult">InlineQueryResult for more information</a> about response types and their arguments.</p>
+<hr />
+<h3>Background and Interactive jobs</h3>
+<p>Background functions and interactive jobs extends the bot functionality to not only react to user input. You can start scripts for interactive chats and send messages based on time or other external events.</p>
+<h5>start_proc</h5>
+<p><code>startproc</code> starts a script, the output of the script is sent to the user or chat, user input will be sent back to the script. see <a href="3_advanced.html">Advanced Usage</a></p>
+<p><em>usage:</em> start_proc "CHAT[ID]" "script"</p>
+<p><em>alias:</em> startproc "script"</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1"></a><span class="ex">startproc</span> <span class="st">&#39;examples/calc.sh&#39;</span></span></code></pre></div>
+<h5>check_proc</h5>
+<p>Return true (0) if an interactive script is running in the chat.</p>
+<p><em>usage:</em> check_prog "CHAT[ID]"</p>
+<p><em>alias:</em> checkprog</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1"></a><span class="kw">if</span> ! <span class="ex">check_proc</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="kw">;</span> <span class="kw">then</span></span>
+<span id="cb35-2"><a href="#cb35-2"></a>  <span class="ex">startproc</span> <span class="st">&quot;examples/calc.sh&quot;</span></span>
+<span id="cb35-3"><a href="#cb35-3"></a><span class="kw">else</span></span>
+<span id="cb35-4"><a href="#cb35-4"></a>   <span class="ex">send_normal_message</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;Calc already running ...&quot;</span></span>
+<span id="cb35-5"><a href="#cb35-5"></a><span class="kw">fi</span></span></code></pre></div>
+<h5>kill_proc</h5>
+<p>Kill the interactive script running in the chat</p>
+<p><em>usage:</em> kill_proc "CHAT[ID]"</p>
+<p><em>alias:</em> killproc</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1"></a><span class="kw">if</span> <span class="ex">check_proc</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="kw">;</span> <span class="kw">then</span></span>
+<span id="cb36-2"><a href="#cb36-2"></a>  <span class="ex">killproc</span> <span class="kw">&amp;&amp;</span> <span class="ex">send_message</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;Command canceled.&quot;</span></span>
+<span id="cb36-3"><a href="#cb36-3"></a><span class="kw">else</span></span>
+<span id="cb36-4"><a href="#cb36-4"></a>  <span class="ex">send_message</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;Command is not running.&quot;</span></span>
+<span id="cb36-5"><a href="#cb36-5"></a><span class="kw">fi</span></span></code></pre></div>
+<hr />
+<h5>start_back</h5>
+<p>Starts a script as a background job and attaches a job name to it. All output from a background job is sent to the associated chat.</p>
+<p>In contrast to interactive chats, background jobs do not receive user input and can run forever. In addition you can suspend and restart running jobs, e.g. after reboot.</p>
+<p><em>usage:</em> start_back "CHAT[ID]" "script" "jobname"</p>
+<p><em>alias:</em> background "script" "jobname"</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1"></a><span class="ex">background</span> <span class="st">&quot;examples/notify.sh&quot;</span> <span class="st">&quot;notify&quot;</span></span></code></pre></div>
+<h5>check_back</h5>
+<p>Return true (0) if an background job is active in the given chat.</p>
+<p><em>usage:</em> check_back "CHAT[ID]" "jobname"</p>
+<p><em>alias:</em> checkback "jobname"</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1"></a><span class="kw">if</span> ! <span class="ex">checkback</span> <span class="st">&quot;notify&quot;</span> <span class="kw">;</span> <span class="kw">then</span></span>
+<span id="cb38-2"><a href="#cb38-2"></a>  <span class="ex">send_normal_message</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;Start notify&quot;</span></span>
+<span id="cb38-3"><a href="#cb38-3"></a>  <span class="ex">background</span> <span class="st">&quot;examples/notify.sh&quot;</span> <span class="st">&quot;notify&quot;</span></span>
+<span id="cb38-4"><a href="#cb38-4"></a><span class="kw">else</span></span>
+<span id="cb38-5"><a href="#cb38-5"></a> <span class="ex">send_normal_message</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;Process notify already running.&quot;</span></span>
+<span id="cb38-6"><a href="#cb38-6"></a><span class="kw">fi</span></span></code></pre></div>
+<h5>kill_back</h5>
+<p><em>usage:</em> kill_back "CHAT[ID]" "jobname"</p>
+<p><em>alias:</em> killback "jobname"</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1"></a><span class="ex">checkback</span> <span class="st">&quot;notify&quot;</span></span>
+<span id="cb39-2"><a href="#cb39-2"></a><span class="kw">if</span><span class="bu"> [</span> <span class="st">&quot;</span><span class="va">$res</span><span class="st">&quot;</span> <span class="ot">-eq</span> 0<span class="bu"> ]</span> ; <span class="kw">then</span></span>
+<span id="cb39-3"><a href="#cb39-3"></a>  <span class="ex">send_normal_message</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;Kill notify&quot;</span></span>
+<span id="cb39-4"><a href="#cb39-4"></a>  <span class="ex">killback</span> <span class="st">&quot;notify&quot;</span></span>
+<span id="cb39-5"><a href="#cb39-5"></a><span class="kw">else</span></span>
+<span id="cb39-6"><a href="#cb39-6"></a>  <span class="ex">send_normal_message</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;Process notify not run.&quot;</span></span>
+<span id="cb39-7"><a href="#cb39-7"></a><span class="kw">fi</span></span></code></pre></div>
+<hr />
+<h5>send_interactive</h5>
+<p><code>send_interactive</code> is used to forward messages to interactive jobs. Usually a message is automatically forwarded from within <code>commands.sh</code>, but you can send messages yourself.</p>
+<p><em>usage:</em> send_interactive "CHAT[ID]" "message"</p>
+<hr />
+<h3>jsshDB</h3>
+<p>Output generated by <code>JSON.sh</code> can easily converted to bash associative arrays. Therefore Bashbot use this format for key/value file store too.</p>
+<h4>fast and slow operations</h4>
+<p>jsshDB files are flat text files containing key/value pairs in <code>JSON.sh</code> format. Key/value pairs appearing later in the file overwrites earlier key/value pairs, Bashbot use this behavior to implement "fast replace" file operations.</p>
+<p>"fast functions" add a new key/value pair to the end of a file without deleting an existing one, this is fast but over time the file grows to infinity.</p>
+<p>"slow functions" read the file, modify the key/value pairs in memory and write the whole file back, this is slower but removes duplicate keys from the file.</p>
+<p>Fast functions:</p>
+<pre><code>   jssh_insertKeyDB , jssh_addKeyDB , jssh_countKeyDB
+</code></pre>
+<p>Slow functions:</p>
+<pre><code>   jssh_writeDB, jssh_updateDB , jssh_deleteKeyDB, jssh_clearDB
+</code></pre>
+<h4>Key / Value</h4>
+<p>JsshBD use bash associative arrays to store key/value pairs in memory. Associative arrays must be created with <code>declare -A</code> before first use.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1"></a><span class="co"># create key / value array</span></span>
+<span id="cb42-2"><a href="#cb42-2"></a><span class="ex">decleare</span> -A ARRAY</span>
+<span id="cb42-3"><a href="#cb42-3"></a></span>
+<span id="cb42-4"><a href="#cb42-4"></a><span class="va">ARRAY[</span><span class="st">&quot;key&quot;</span><span class="va">]=</span><span class="st">&quot;value&quot;</span></span>
+<span id="cb42-5"><a href="#cb42-5"></a><span class="va">ARRAY[</span><span class="st">&quot;key,subkey&quot;</span><span class="va">]=</span><span class="st">&quot;value2&quot;</span></span></code></pre></div>
+<p>Only the following characters are allowed for keys: <code>a-z A-Z 0-9 _ .</code>, multiple keys must be separated by <code>,</code>. Keys contaiing other characters will be discarded when written to a file.</p>
+<p>To delete (unset) a key/value pair in memory you can <code>unset ARRAY["abc"]</code> but this will not delete the key/value pair when using <code>jssh_updateDB</code> to update a file. Therefore the special value <code>${JSSHDB_UNSET}</code> exists, see <code>jssh_updateDB</code></p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1"></a><span class="va">ARRAY[</span><span class="st">&quot;abc&quot;</span><span class="va">]=</span><span class="st">&quot;abc&quot;</span>         <span class="co"># OK</span></span>
+<span id="cb43-2"><a href="#cb43-2"></a><span class="va">ARRAY[</span><span class="st">&quot;abx###&quot;</span><span class="va">]=</span><span class="st">&quot;abc&quot;</span>      <span class="co"># works in bash but will not saved to file</span></span>
+<span id="cb43-3"><a href="#cb43-3"></a></span>
+<span id="cb43-4"><a href="#cb43-4"></a><span class="co"># write to file will discard second value</span></span>
+<span id="cb43-5"><a href="#cb43-5"></a><span class="ex">jssh_writeDB</span> <span class="st">&quot;ARRAY&quot;</span> <span class="st">&quot;file&quot;</span></span>
+<span id="cb43-6"><a href="#cb43-6"></a></span>
+<span id="cb43-7"><a href="#cb43-7"></a><span class="fu">cat</span> file.jssh</span>
+<span id="cb43-8"><a href="#cb43-8"></a>[<span class="st">&quot;abc&quot;</span>]      <span class="st">&quot;abc&quot;</span></span>
+<span id="cb43-9"><a href="#cb43-9"></a></span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb44-1"><a href="#cb44-1"></a><span class="co"># strip key containing invalid characters</span></span>
+<span id="cb44-2"><a href="#cb44-2"></a><span class="va">KEY=</span><span class="st">&quot;123abcABC,.#?(&lt;&gt;123ÄÖ*%&amp;§&quot;</span></span>
+<span id="cb44-3"><a href="#cb44-3"></a><span class="va">OK_KEY=</span><span class="st">&quot;</span><span class="va">$(</span><span class="fu">tr</span> -dc <span class="st">&quot;[:alnum:],.\r\n&quot;</span> <span class="op">&lt;&lt;&lt;</span><span class="st">&quot;</span><span class="va">${KEY}</span><span class="st">&quot;</span><span class="va">)</span><span class="st">&quot;</span></span>
+<span id="cb44-4"><a href="#cb44-4"></a></span>
+<span id="cb44-5"><a href="#cb44-5"></a><span class="co"># show stripped key</span></span>
+<span id="cb44-6"><a href="#cb44-6"></a><span class="bu">printf</span> <span class="st">&quot;%s\n&quot;</span> <span class="st">&quot;</span><span class="va">${OK_KEY}</span><span class="st">&quot;</span></span>
+<span id="cb44-7"><a href="#cb44-7"></a></span>
+<span id="cb44-8"><a href="#cb44-8"></a><span class="ex">123abcABC</span>,.123</span></code></pre></div>
+<h4>File naming and locking</h4>
+<p>A jssh fileDB consists of two files and must reside inside <code>BASHBOT_ETC</code> or <code>BASHBOT_DATA</code>.</p>
+<ul>
+<li><code>filename.jssh</code> is the file containing the key/value pairs in JSON.sh format.</li>
+<li><code>filename.jssh.flock</code> is used to provide read/write locking with flock</li>
+</ul>
+<p>Path names containing <code>..</code> or not located in <code>BASHBOT_ETC</code> or <code>BASHBOT_DATA</code> are refused by jsshDB functions with an error.</p>
+<p>jsshDB functions use file locking if `flock is available, read/write operations are serialised to wait until previous operations are finished, see "man flock". To avoid deadlocks bashbot use a timeout of 10s for write and 5s for read operations.</p>
+<p>For every <code>jssh_...DB</code> function a <code>jsshj_...DB_async</code> function exists also. In case don't want locking, use <code>jssh_...DB_async</code> functions.</p>
+<p><em>Example:</em> for allowed file names:</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb45-1"><a href="#cb45-1"></a><span class="co"># bashbot is installed in /usr/local/telegram-bot-bash, BASHBOT_ETC is not set.</span></span>
+<span id="cb45-2"><a href="#cb45-2"></a><span class="st">&quot;myfile&quot;</span> <span class="ex">-</span><span class="op">&gt;</span> /usr/local/telegram-bot-bash/myfile.jssh</span>
+<span id="cb45-3"><a href="#cb45-3"></a><span class="st">&quot;addons/myfile&quot;</span> <span class="ex">-</span><span class="op">&gt;</span> /usr/local/telegram-bot-bash/addons/myfile.jssh</span>
+<span id="cb45-4"><a href="#cb45-4"></a><span class="st">&quot;</span><span class="va">${DATADIR}</span><span class="st">/myfile&quot;</span> <span class="ex">-</span><span class="op">&gt;</span> /usr/local/telegram-bot-bash/data-bot-bash/myfile.jssh</span>
+<span id="cb45-5"><a href="#cb45-5"></a><span class="st">&quot;/home/someuser/myfile&quot;</span> <span class="ex">-</span><span class="op">&gt;</span> function returns false, nothing done.</span></code></pre></div>
+<h5>jssh_newDB</h5>
+<p>Creates new empty jsshDB file if not exist.</p>
+<p><em>usage:</em> jssh_newDB "filename"</p>
+<p><em>usage:</em> jssh_newDB_async "filename"</p>
+<h5>jssh_clearDB</h5>
+<p>Delete all contents of jsshDB file.</p>
+<p><em>usage:</em> jssh_clearDB "filename"</p>
+<p><em>usage:</em> jssh_clearDB_async "filename"</p>
+<h5>jssh_checkDB</h5>
+<p>Check if DB name respects the rules mentioned above and print to STDOUT the real/final path to DB file. Used internally by all jssh DB functions, but can also used to get the real filename for a jssh DB.</p>
+<p>An error is returned and nothing is printed if the given filename is not valid</p>
+<p><em>usage:</em> jssh_checkDB "filename"</p>
+<p><em>usage:</em> jssh_checkDB_async "filename"</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb46-1"><a href="#cb46-1"></a><span class="kw">if</span> <span class="va">file=$(</span><span class="ex">jssh_checkDB</span> somename<span class="va">)</span>; <span class="kw">then</span></span>
+<span id="cb46-2"><a href="#cb46-2"></a>    <span class="bu">echo</span> <span class="st">&quot;Final filename is </span><span class="va">${file}</span><span class="st">&quot;</span></span>
+<span id="cb46-3"><a href="#cb46-3"></a><span class="kw">else</span></span>
+<span id="cb46-4"><a href="#cb46-4"></a>    <span class="bu">echo</span> <span class="st">&quot;Something wrong with somename&quot;</span></span>
+<span id="cb46-5"><a href="#cb46-5"></a><span class="kw">fi</span></span>
+<span id="cb46-6"><a href="#cb46-6"></a></span>
+<span id="cb46-7"><a href="#cb46-7"></a><span class="co"># somename = data-bot-bash/somevalues</span></span>
+<span id="cb46-8"><a href="#cb46-8"></a><span class="ex">Final</span> filename is data-bot-bash/somevalues.jssh</span>
+<span id="cb46-9"><a href="#cb46-9"></a></span>
+<span id="cb46-10"><a href="#cb46-10"></a><span class="co"># somename = /home/someuser/myfile</span></span>
+<span id="cb46-11"><a href="#cb46-11"></a><span class="ex">Something</span> wrong with /home/someuser/myfile</span>
+<span id="cb46-12"><a href="#cb46-12"></a></span>
+<span id="cb46-13"><a href="#cb46-13"></a><span class="co"># somename = data-bot-bash/../../../somevalues</span></span>
+<span id="cb46-14"><a href="#cb46-14"></a><span class="ex">Something</span> wrong with data-bot-bash/../../../somevalues</span></code></pre></div>
+<h5>jssh_writeDB</h5>
+<p>Write content of an ARRAY into jsshDB file. ARRAY name must be declared with <code>declare -A ARRAY</code> before calling writeDB. if "DB" file does not exist nothing is written.</p>
+<p>Note: Existing content is overwritten.</p>
+<p><em>usage:</em> jssh_writeDB "ARRAY" "filename"</p>
+<p><em>usage:</em> jssh_writeDB_async "ARRAY" "filename"</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb47-1"><a href="#cb47-1"></a><span class="co"># Prepare array to store values</span></span>
+<span id="cb47-2"><a href="#cb47-2"></a><span class="bu">declare</span> -A  <span class="va">WRITEVALUES</span></span>
+<span id="cb47-3"><a href="#cb47-3"></a></span>
+<span id="cb47-4"><a href="#cb47-4"></a><span class="va">WRITEVALUES[</span><span class="st">&quot;value1&quot;</span><span class="va">]=</span><span class="st">&quot;example&quot;</span></span>
+<span id="cb47-5"><a href="#cb47-5"></a><span class="va">WRITEVALUES[</span><span class="st">&quot;value2&quot;</span><span class="va">]=</span><span class="st">&quot;a value&quot;</span></span>
+<span id="cb47-6"><a href="#cb47-6"></a><span class="va">WRITEVALUES[</span><span class="st">&quot;whynot&quot;</span><span class="va">,</span><span class="st">&quot;subindex1&quot;</span><span class="va">]=</span><span class="st">&quot;whynot A&quot;</span></span>
+<span id="cb47-7"><a href="#cb47-7"></a><span class="va">WRITEVALUES[</span><span class="st">&quot;whynot&quot;</span><span class="va">,</span><span class="st">&quot;subindex2&quot;</span><span class="va">]=</span><span class="st">&quot;whynot B&quot;</span></span>
+<span id="cb47-8"><a href="#cb47-8"></a><span class="va">WRITEVALUES[</span><span class="st">&quot;whynot&quot;</span><span class="va">,</span><span class="st">&quot;subindex2&quot;</span><span class="va">,</span><span class="st">&quot;text&quot;</span><span class="va">]=</span><span class="st">&quot;This is an example content for pseudo multidimensional bash array&quot;</span></span>
+<span id="cb47-9"><a href="#cb47-9"></a></span>
+<span id="cb47-10"><a href="#cb47-10"></a><span class="co"># create DB</span></span>
+<span id="cb47-11"><a href="#cb47-11"></a><span class="ex">jssh_newDB</span> <span class="st">&quot;</span><span class="va">${DATADIR:-</span>.<span class="va">}</span><span class="st">/myvalues&quot;</span></span>
+<span id="cb47-12"><a href="#cb47-12"></a></span>
+<span id="cb47-13"><a href="#cb47-13"></a><span class="co"># write to file data-bot-bash/somevalues.jssh from array MYVALUES</span></span>
+<span id="cb47-14"><a href="#cb47-14"></a><span class="ex">jssh_writeDB</span> <span class="st">&quot;WRITEVALUES&quot;</span> <span class="st">&quot;</span><span class="va">${DATADIR:-}</span><span class="st">/myvalues&quot;</span></span>
+<span id="cb47-15"><a href="#cb47-15"></a></span>
+<span id="cb47-16"><a href="#cb47-16"></a><span class="co"># show what&#39;s written</span></span>
+<span id="cb47-17"><a href="#cb47-17"></a><span class="fu">cat</span> <span class="st">&quot;</span><span class="va">${DATADIR:-}</span><span class="st">/myvalues.jssh&quot;</span></span>
+<span id="cb47-18"><a href="#cb47-18"></a>[<span class="st">&quot;value1&quot;</span>]  <span class="st">&quot;example&quot;</span></span>
+<span id="cb47-19"><a href="#cb47-19"></a>[<span class="st">&quot;value2&quot;</span>]  <span class="st">&quot;a value&quot;</span></span>
+<span id="cb47-20"><a href="#cb47-20"></a>[<span class="st">&quot;whynot&quot;</span>,<span class="st">&quot;subindex2&quot;</span>,<span class="st">&quot;text&quot;</span>]   <span class="st">&quot;This is an example content for pseudo multidimensional bash array&quot;</span></span>
+<span id="cb47-21"><a href="#cb47-21"></a>[<span class="st">&quot;whynot&quot;</span>,<span class="st">&quot;subindex2&quot;</span>]  <span class="st">&quot;whynot B&quot;</span></span>
+<span id="cb47-22"><a href="#cb47-22"></a>[<span class="st">&quot;whynot&quot;</span>,<span class="st">&quot;subindex1&quot;</span>]  <span class="st">&quot;whynot A&quot;</span></span></code></pre></div>
+<h5>jssh_printDB</h5>
+<p>Print content of an ARRAY to STDOUT. ARRAY name must be declared with <code>declare -A ARRAY</code> before calling printDB..</p>
+<p><em>usage:</em> jssh_printDB "ARRAY"</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb48-1"><a href="#cb48-1"></a><span class="co"># Prepare array to store values</span></span>
+<span id="cb48-2"><a href="#cb48-2"></a><span class="bu">declare</span> -A  <span class="va">PRINTVALUES</span></span>
+<span id="cb48-3"><a href="#cb48-3"></a></span>
+<span id="cb48-4"><a href="#cb48-4"></a><span class="co"># read file data-bot-bash/myvalues.jssh into array READVALUES</span></span>
+<span id="cb48-5"><a href="#cb48-5"></a><span class="ex">jssh_readDB</span> <span class="st">&quot;PRINTVALUES&quot;</span> <span class="st">&quot;</span><span class="va">${DATADIR:-}</span><span class="st">/myvalues&quot;</span></span>
+<span id="cb48-6"><a href="#cb48-6"></a></span>
+<span id="cb48-7"><a href="#cb48-7"></a><span class="co"># print DB to stdout</span></span>
+<span id="cb48-8"><a href="#cb48-8"></a><span class="ex">jssh_printDB</span> READVALUES</span>
+<span id="cb48-9"><a href="#cb48-9"></a>[<span class="st">&quot;value1&quot;</span>]  <span class="st">&quot;example&quot;</span></span>
+<span id="cb48-10"><a href="#cb48-10"></a>[<span class="st">&quot;value2&quot;</span>]  <span class="st">&quot;a value&quot;</span></span>
+<span id="cb48-11"><a href="#cb48-11"></a>[<span class="st">&quot;whynot&quot;</span>,<span class="st">&quot;subindex2&quot;</span>,<span class="st">&quot;text&quot;</span>]   <span class="st">&quot;This is an example content for pseudo multidimensional bash array&quot;</span></span>
+<span id="cb48-12"><a href="#cb48-12"></a>[<span class="st">&quot;whynot&quot;</span>,<span class="st">&quot;subindex2&quot;</span>]  <span class="st">&quot;whynot B&quot;</span></span>
+<span id="cb48-13"><a href="#cb48-13"></a>[<span class="st">&quot;whynot&quot;</span>,<span class="st">&quot;subindex1&quot;</span>]  <span class="st">&quot;whynot A&quot;</span><span class="kw">```</span></span></code></pre></div>
+<h5>jssh_updateDB</h5>
+<p><code>jssh_updateDB updates key/value pairs of an ARRAY in a jsshDB file. ARRAY name must be declared with </code>declare -A ARRAY` before calling updateDB. if "DB" file does not exist nothing is written.</p>
+<p><em>usage:</em> jssh_updateDB "ARRAY" "filename"</p>
+<p><em>usage:</em> jssh_updateDB_async "ARRAY" "filename"</p>
+<p><code>jssh_updateDB</code> update new or changed keys/value pairs only, it will not delete an existing key/value pair. To delete an existing key/value pair you must assign the "unset value" <code>${JSSJDB_UNSET}</code> to it instead.</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb49-1"><a href="#cb49-1"></a><span class="co"># continued example from writeDB</span></span>
+<span id="cb49-2"><a href="#cb49-2"></a><span class="va">MYVALUES=()</span></span>
+<span id="cb49-3"><a href="#cb49-3"></a><span class="va">MYVALUES[</span><span class="st">&quot;newvalue&quot;</span><span class="va">]=</span><span class="st">&quot;this is new&quot;</span></span>
+<span id="cb49-4"><a href="#cb49-4"></a></span>
+<span id="cb49-5"><a href="#cb49-5"></a><span class="co"># update file data-bot-bash/somevalues.jssh from array MYVALUES</span></span>
+<span id="cb49-6"><a href="#cb49-6"></a><span class="ex">jssh_updateDB</span> <span class="st">&quot;MYVALUES&quot;</span> <span class="st">&quot;</span><span class="va">${DATADIR:-</span>.<span class="va">}</span><span class="st">/myvalues&quot;</span></span>
+<span id="cb49-7"><a href="#cb49-7"></a></span>
+<span id="cb49-8"><a href="#cb49-8"></a><span class="co"># show what&#39;s written</span></span>
+<span id="cb49-9"><a href="#cb49-9"></a><span class="fu">cat</span> <span class="va">${DATADIR:-</span>.<span class="va">}</span>/myvalues<span class="st">&quot;.jssh</span></span>
+<span id="cb49-10"><a href="#cb49-10"></a><span class="st">[&quot;</span>value1<span class="st">&quot;]  &quot;</span>value1<span class="st">&quot;</span></span>
+<span id="cb49-11"><a href="#cb49-11"></a><span class="st">[&quot;</span>loveit<span class="st">&quot;]  &quot;</span>value2<span class="st">&quot;</span></span>
+<span id="cb49-12"><a href="#cb49-12"></a><span class="st">[&quot;</span>whynot<span class="st">&quot;]  &quot;</span>value3<span class="st">&quot;</span></span>
+<span id="cb49-13"><a href="#cb49-13"></a><span class="st">[&quot;</span>newvalue<span class="st">&quot;]    &quot;</span>this is new<span class="st">&quot;</span></span>
+<span id="cb49-14"><a href="#cb49-14"></a></span>
+<span id="cb49-15"><a href="#cb49-15"></a><span class="st">#######</span></span>
+<span id="cb49-16"><a href="#cb49-16"></a><span class="st"># update does not delete key/value pairs</span></span>
+<span id="cb49-17"><a href="#cb49-17"></a><span class="st"># uset in bash and update file</span></span>
+<span id="cb49-18"><a href="#cb49-18"></a><span class="st">unset MYVALUES[&quot;</span>newvalue<span class="st">&quot;]</span></span>
+<span id="cb49-19"><a href="#cb49-19"></a><span class="st">jssh_updateDB &quot;</span>MYVALUES<span class="st">&quot; &quot;</span><span class="va">${DATADIR:-</span>.<span class="va">}</span>/myvalues<span class="st">&quot;</span></span>
+<span id="cb49-20"><a href="#cb49-20"></a></span>
+<span id="cb49-21"><a href="#cb49-21"></a><span class="st">[&quot;</span>value1<span class="st">&quot;]      &quot;</span>value1<span class="st">&quot;</span></span>
+<span id="cb49-22"><a href="#cb49-22"></a><span class="st">[&quot;</span>loveit<span class="st">&quot;]      &quot;</span>value2<span class="st">&quot;</span></span>
+<span id="cb49-23"><a href="#cb49-23"></a><span class="st">[&quot;</span>whynot<span class="st">&quot;]      &quot;</span>value3<span class="st">&quot;</span></span>
+<span id="cb49-24"><a href="#cb49-24"></a><span class="st">[&quot;</span>newvalue<span class="st">&quot;]    &quot;</span>this is new<span class="st">&quot;       # value exists!</span></span>
+<span id="cb49-25"><a href="#cb49-25"></a></span>
+<span id="cb49-26"><a href="#cb49-26"></a><span class="st"># use JSSHDB_UNSET value</span></span>
+<span id="cb49-27"><a href="#cb49-27"></a><span class="st">MYVALUES[&quot;</span>newvalue<span class="st">&quot;]=&quot;</span><span class="va">${JSSHDB_UNSET}</span><span class="st">&quot;</span></span>
+<span id="cb49-28"><a href="#cb49-28"></a><span class="st">jssh_updateDB &quot;</span>MYVALUES<span class="st">&quot; &quot;</span><span class="va">${DATADIR:-</span>.<span class="va">}</span>/myvalues<span class="st">&quot;</span></span>
+<span id="cb49-29"><a href="#cb49-29"></a></span>
+<span id="cb49-30"><a href="#cb49-30"></a><span class="st">[&quot;</span>value1<span class="st">&quot;]      &quot;</span>value1<span class="st">&quot;</span></span>
+<span id="cb49-31"><a href="#cb49-31"></a><span class="st">[&quot;</span>loveit<span class="st">&quot;]      &quot;</span>value2<span class="st">&quot;</span></span>
+<span id="cb49-32"><a href="#cb49-32"></a><span class="st">[&quot;</span>whynot<span class="st">&quot;]      &quot;</span>value3<span class="st">&quot;</span></span>
+<span id="cb49-33"><a href="#cb49-33"></a></span></code></pre></div>
+<h5>jssh_readDB</h5>
+<p>Read content of a file in JSON.sh format into given ARRAY. ARRAY name must be declared with <code>declare -A ARRAY</code> upfront,</p>
+<p><em>usage:</em> jssh_readDB "ARRAY" "filename"</p>
+<p><em>usage:</em> jssh_readDB_async "ARRAY" "filename"</p>
+<p>Note: readDB uses concurrent / shared locking from flock so multiple processes can read from file, as long no process is writing. Maximum timeout for reading is 1s to not block readers.</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb50-1"><a href="#cb50-1"></a><span class="co"># Prepare array to read values</span></span>
+<span id="cb50-2"><a href="#cb50-2"></a><span class="bu">declare</span> -A  <span class="va">READVALUES</span></span>
+<span id="cb50-3"><a href="#cb50-3"></a></span>
+<span id="cb50-4"><a href="#cb50-4"></a><span class="co"># read file data-bot-bash/myvalues.jssh into array READVALUES</span></span>
+<span id="cb50-5"><a href="#cb50-5"></a><span class="ex">jssh_readDB</span> <span class="st">&quot;READVALUES&quot;</span> <span class="st">&quot;</span><span class="va">${DATADIR:-}</span><span class="st">/myvalues&quot;</span></span>
+<span id="cb50-6"><a href="#cb50-6"></a></span>
+<span id="cb50-7"><a href="#cb50-7"></a><span class="co"># sinple command to output values ONLY</span></span>
+<span id="cb50-8"><a href="#cb50-8"></a><span class="bu">printf</span> <span class="st">&quot;</span><span class="va">${READVALUES[*]}</span><span class="st">&quot;</span></span>
+<span id="cb50-9"><a href="#cb50-9"></a><span class="ex">example</span> a value This is an example content for pseudo multidimensional bash array whynot B whynot A</span>
+<span id="cb50-10"><a href="#cb50-10"></a></span>
+<span id="cb50-11"><a href="#cb50-11"></a><span class="co"># print DB to stdout</span></span>
+<span id="cb50-12"><a href="#cb50-12"></a><span class="ex">jssh_printDB</span> READVALUES</span>
+<span id="cb50-13"><a href="#cb50-13"></a>[<span class="st">&quot;value1&quot;</span>]  <span class="st">&quot;example&quot;</span></span>
+<span id="cb50-14"><a href="#cb50-14"></a>[<span class="st">&quot;value2&quot;</span>]  <span class="st">&quot;a value&quot;</span></span>
+<span id="cb50-15"><a href="#cb50-15"></a>[<span class="st">&quot;whynot&quot;</span>,<span class="st">&quot;subindex2&quot;</span>,<span class="st">&quot;text&quot;</span>]   <span class="st">&quot;This is an example content for pseudo multidimensional bash array&quot;</span></span>
+<span id="cb50-16"><a href="#cb50-16"></a>[<span class="st">&quot;whynot&quot;</span>,<span class="st">&quot;subindex2&quot;</span>]  <span class="st">&quot;whynot B&quot;</span></span>
+<span id="cb50-17"><a href="#cb50-17"></a>[<span class="st">&quot;whynot&quot;</span>,<span class="st">&quot;subindex1&quot;</span>]  <span class="st">&quot;whynot A&quot;</span></span>
+<span id="cb50-18"><a href="#cb50-18"></a></span>
+<span id="cb50-19"><a href="#cb50-19"></a></span>
+<span id="cb50-20"><a href="#cb50-20"></a><span class="co"># access Array</span></span>
+<span id="cb50-21"><a href="#cb50-21"></a><span class="bu">echo</span> <span class="st">&quot;</span><span class="va">${READVALUES[vaule2]}</span><span class="st">&quot;</span></span>
+<span id="cb50-22"><a href="#cb50-22"></a><span class="ex">a</span> value</span>
+<span id="cb50-23"><a href="#cb50-23"></a></span>
+<span id="cb50-24"><a href="#cb50-24"></a><span class="co"># change / add values</span></span>
+<span id="cb50-25"><a href="#cb50-25"></a><span class="va">READVALUES[</span><span class="st">&quot;value2&quot;</span><span class="va">]=</span><span class="st">&quot;this is a changed value&quot;</span></span>
+<span id="cb50-26"><a href="#cb50-26"></a></span>
+<span id="cb50-27"><a href="#cb50-27"></a><span class="bu">echo</span> <span class="st">&quot;</span><span class="va">${READVALUES[vaule2]}</span><span class="st">&quot;</span></span>
+<span id="cb50-28"><a href="#cb50-28"></a><span class="ex">this</span> is a changed value</span>
+<span id="cb50-29"><a href="#cb50-29"></a></span>
+<span id="cb50-30"><a href="#cb50-30"></a><span class="va">READVALUES[</span><span class="st">&quot;value3&quot;</span><span class="va">]=</span><span class="st">&quot;new value&quot;</span></span>
+<span id="cb50-31"><a href="#cb50-31"></a><span class="va">READVALUES[whynot,subindex3]=</span><span class="st">&quot;new subindex value&quot;</span></span>
+<span id="cb50-32"><a href="#cb50-32"></a></span>
+<span id="cb50-33"><a href="#cb50-33"></a><span class="co"># new output</span></span>
+<span id="cb50-34"><a href="#cb50-34"></a><span class="ex">jssh_printDB</span> READVALUES</span>
+<span id="cb50-35"><a href="#cb50-35"></a>[<span class="st">&quot;value1&quot;</span>]  <span class="st">&quot;example&quot;</span></span>
+<span id="cb50-36"><a href="#cb50-36"></a>[<span class="st">&quot;value3&quot;</span>]  <span class="st">&quot;new value&quot;</span></span>
+<span id="cb50-37"><a href="#cb50-37"></a>[<span class="st">&quot;value2&quot;</span>]  <span class="st">&quot;this is a changed value&quot;</span></span>
+<span id="cb50-38"><a href="#cb50-38"></a>[<span class="st">&quot;whynot&quot;</span>,<span class="st">&quot;subindex2&quot;</span>,<span class="st">&quot;text&quot;</span>]   <span class="st">&quot;This is an example content for pseudo multidimensional bash array&quot;</span></span>
+<span id="cb50-39"><a href="#cb50-39"></a>[<span class="st">&quot;whynot&quot;</span>,<span class="st">&quot;subindex3&quot;</span>]  <span class="st">&quot;new subindex value&quot;</span></span>
+<span id="cb50-40"><a href="#cb50-40"></a>[<span class="st">&quot;whynot&quot;</span>,<span class="st">&quot;subindex2&quot;</span>]  <span class="st">&quot;whynot B&quot;</span></span>
+<span id="cb50-41"><a href="#cb50-41"></a>[<span class="st">&quot;whynot&quot;</span>,<span class="st">&quot;subindex1&quot;</span>]  <span class="st">&quot;whynot A&quot;</span></span></code></pre></div>
+<h5>jssh_insertKeyDB</h5>
+<p>Insert, update, append a key=value pair to a jsshDB file, key name is only allowed to contain '-a-zA-Z0-9,._'</p>
+<p><em>usage:</em> jssh_insertKeyDB "key" "value" "filename"</p>
+<p><em>usage:</em> jssh_insertKeyDB_asnyc "key" "value" "filename"</p>
+<p><em>deprecated:</em> jssh_insertDB <em>was renamed in version 0.96 to</em> jssh_insertKeyDB</p>
+<p>Note: inserKeytDB uses also excusive write locking, but with a maximum timeout of 2s. insertKeyDB is a "fast" operation, simply adding the value to the end of the file.</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb51-1"><a href="#cb51-1"></a><span class="ex">jssh_insertKeyDB</span> <span class="st">&quot;newkey&quot;</span> <span class="st">&quot;an other value&quot;</span> <span class="st">&quot;</span><span class="va">${DATADIR:-</span>.<span class="va">}</span><span class="st">/myvalues&quot;</span></span></code></pre></div>
+<h5>jssh_deleteKeyDB</h5>
+<p>Deleted a key=value pair from a jsshDB file, key name is only allowed to contain '-a-zA-Z0-9,._'</p>
+<p><em>usage:</em> jssh_deleteKeyDB "key" "filename"</p>
+<p><em>usage:</em> jssh_deleteKeyDB_async "key" "filename"</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb52-1"><a href="#cb52-1"></a><span class="ex">jssh_deleteKeyDB</span> <span class="st">&quot;delkey&quot;&quot; &quot;</span><span class="va">${DATADIR:-</span>.<span class="va">}</span>/myvalues<span class="st">&quot;</span></span></code></pre></div>
+<h5>jssh_countKeyDB</h5>
+<p>Increase a key=value pair from a jsshDB file by 1, key name is only allowed to contain '-a-zA-Z0-9,._' If value is given key is increased by value.</p>
+<p>Side effect: if value is given key is updated "in place" (slower) and file is cleaned up, if no value is given fast path is used and new count is added to the end of file.</p>
+<p><em>usage:</em> jssh_countKeyDB "key" "filename" ["value"]</p>
+<p><em>usage:</em> jssh_countKeyDB_async "key" "filename" ["value"]</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb53-1"><a href="#cb53-1"></a><span class="ex">jssh_countKeyDB</span> <span class="st">&quot;usercount&quot;&quot; &quot;</span><span class="va">${DATADIR:-</span>.<span class="va">}</span>/myvalues<span class="st">&quot;</span></span></code></pre></div>
+<p>https://linuxhint.com/associative_array_bash/</p>
+<p>https://linuxconfig.org/how-to-use-arrays-in-bash-script</p>
+<hr />
+<h3>Manage webhook</h3>
+<p>Bashbot default mode is to poll Telegram server for updates but Telegram offers also webhook as a more efficient method to deliver updates.</p>
+<p><em>Important</em>: Before enable webhook you must setup your server to <a href="../examples/webhook">receive and process webhook updates from Telegram</a> I recommend to use webhook with a test bot first.</p>
+<h5>get_webhook_info</h5>
+<p><code>get_webhook_info</code> get current status of webhook for your bot, e.g. url, waiting updates, last error.</p>
+<p><em>usage:</em> get_webhook_info</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb54-1"><a href="#cb54-1"></a><span class="ex">bin/any_command.sh</span> get_webhook_info</span>
+<span id="cb54-2"><a href="#cb54-2"></a></span>
+<span id="cb54-3"><a href="#cb54-3"></a>[<span class="st">&quot;URL&quot;</span>] <span class="st">&quot;&quot;</span></span>
+<span id="cb54-4"><a href="#cb54-4"></a>[<span class="st">&quot;OK&quot;</span>]  <span class="st">&quot;true&quot;</span></span>
+<span id="cb54-5"><a href="#cb54-5"></a>[<span class="st">&quot;LASTERR&quot;</span>]     <span class="st">&quot;&quot;</span></span>
+<span id="cb54-6"><a href="#cb54-6"></a>[<span class="st">&quot;COUNT&quot;</span>]       <span class="st">&quot;0&quot;</span></span>
+<span id="cb54-7"><a href="#cb54-7"></a>[<span class="st">&quot;CERT&quot;</span>]        <span class="st">&quot;false&quot;</span></span>
+<span id="cb54-8"><a href="#cb54-8"></a>[<span class="st">&quot;result&quot;</span>,<span class="st">&quot;pending_update_count&quot;</span>]       <span class="st">&quot;0&quot;</span></span>
+<span id="cb54-9"><a href="#cb54-9"></a>[<span class="st">&quot;ok&quot;</span>]  <span class="st">&quot;true&quot;</span></span>
+<span id="cb54-10"><a href="#cb54-10"></a>[<span class="st">&quot;result&quot;</span>,<span class="st">&quot;has_custom_certificate&quot;</span>]     <span class="st">&quot;false&quot;</span></span></code></pre></div>
+<h5>delete_webhook</h5>
+<p><code>delete_webhook</code> deletes your bots current webhook, deletes outstanding updates also if second arg is <code>true</code></p>
+<p><em>usage:</em> delete_webhook [true|false]</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb55-1"><a href="#cb55-1"></a><span class="ex">bin/any_command.sh</span> delete_webhook false</span>
+<span id="cb55-2"><a href="#cb55-2"></a></span>
+<span id="cb55-3"><a href="#cb55-3"></a>[<span class="st">&quot;RESULT&quot;</span>]      <span class="st">&quot;true&quot;</span></span>
+<span id="cb55-4"><a href="#cb55-4"></a>[<span class="st">&quot;OK&quot;</span>]  <span class="st">&quot;true&quot;</span></span>
+<span id="cb55-5"><a href="#cb55-5"></a>[<span class="st">&quot;result&quot;</span>]      <span class="st">&quot;true&quot;</span></span>
+<span id="cb55-6"><a href="#cb55-6"></a>[<span class="st">&quot;ok&quot;</span>]  <span class="st">&quot;true&quot;</span></span>
+<span id="cb55-7"><a href="#cb55-7"></a>[<span class="st">&quot;description&quot;</span>] <span class="st">&quot;Webhook was deleted&quot;</span></span></code></pre></div>
+<h5>set_webhook</h5>
+<p><code>set_webhook</code> instructs Telegram to use your bots webhook for delivering updates. If webhook is set it's no more possible to pull updates from <code>bashbot start</code>, you must delete webhook first.</p>
+<p><em>Important</em>: Before using webhook you must setup your server to receive and process updates from Telegram!</p>
+<p><em>usage:</em> set_webhook "https://host.dom[:port][/path]" [max_conn]</p>
+<p>First arg is webhook URL used to send updates to your bot, <code>:port</code> and <code>/path</code> are optional. If <code>:port</code> is given it must be one of <code>:443</code>, <code>:80</code>, <code>:88</code> or <code>:8443</code>, default is<code>:80</code>. For security reasons <code>BOTTOKEN</code> will be added to URL (<em>e.g. <code>https://myhost.com</code> -&gt; <code>https://myhost.com/12345678:azndfhbgdfbbbdsfg/</code></em>).</p>
+<p>Second arg is max connection rate in the range 1-100, bashbot default is 1.</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb56-1"><a href="#cb56-1"></a><span class="ex">bin/any_command.sh</span> set_webhook <span class="st">&quot;https://myhost.com/telegram&quot;</span> <span class="st">&quot;2&quot;</span></span>
+<span id="cb56-2"><a href="#cb56-2"></a></span>
+<span id="cb56-3"><a href="#cb56-3"></a>[<span class="st">&quot;OK&quot;</span>]  <span class="st">&quot;true&quot;</span></span>
+<span id="cb56-4"><a href="#cb56-4"></a>[<span class="st">&quot;RESULT&quot;</span>]      <span class="st">&quot;true&quot;</span></span>
+<span id="cb56-5"><a href="#cb56-5"></a>[<span class="st">&quot;ok&quot;</span>]  <span class="st">&quot;true&quot;</span></span>
+<span id="cb56-6"><a href="#cb56-6"></a>[<span class="st">&quot;result&quot;</span>]      <span class="st">&quot;true&quot;</span></span>
+<span id="cb56-7"><a href="#cb56-7"></a>[<span class="st">&quot;description&quot;</span>] <span class="st">&quot;Webhook is set&quot;</span></span>
+<span id="cb56-8"><a href="#cb56-8"></a></span>
+<span id="cb56-9"><a href="#cb56-9"></a><span class="ex">bin/any_command.sh</span> get_webhook_info</span>
+<span id="cb56-10"><a href="#cb56-10"></a></span>
+<span id="cb56-11"><a href="#cb56-11"></a>[<span class="st">&quot;OK&quot;</span>]  <span class="st">&quot;true&quot;</span></span>
+<span id="cb56-12"><a href="#cb56-12"></a>[<span class="st">&quot;URL&quot;</span>] <span class="st">&quot;https://myhost.com/telegram/12345678:AABBCCDDEE...aabbccee124567890/&quot;</span></span>
+<span id="cb56-13"><a href="#cb56-13"></a>[<span class="st">&quot;COUNT&quot;</span>]       <span class="st">&quot;0&quot;</span></span>
+<span id="cb56-14"><a href="#cb56-14"></a>[<span class="st">&quot;CERT&quot;</span>]        <span class="st">&quot;false&quot;</span></span>
+<span id="cb56-15"><a href="#cb56-15"></a>[<span class="st">&quot;ok&quot;</span>]  <span class="st">&quot;true&quot;</span></span>
+<span id="cb56-16"><a href="#cb56-16"></a>[<span class="st">&quot;result&quot;</span>,<span class="st">&quot;ip_address&quot;</span>] <span class="st">&quot;1.2.3.4&quot;</span></span>
+<span id="cb56-17"><a href="#cb56-17"></a>[<span class="st">&quot;result&quot;</span>,<span class="st">&quot;url&quot;</span>]        <span class="st">&quot;https://myhost.com/telegram/12345678:AABBCCDDEE...aabbccee124567890/&quot;</span></span>
+<span id="cb56-18"><a href="#cb56-18"></a>[<span class="st">&quot;result&quot;</span>,<span class="st">&quot;pending_update_count&quot;</span>]       <span class="st">&quot;0&quot;</span></span>
+<span id="cb56-19"><a href="#cb56-19"></a>[<span class="st">&quot;result&quot;</span>,<span class="st">&quot;max_connections&quot;</span>]    <span class="st">&quot;2&quot;</span></span>
+<span id="cb56-20"><a href="#cb56-20"></a>[<span class="st">&quot;result&quot;</span>,<span class="st">&quot;has_custom_certificate&quot;</span>]     <span class="st">&quot;false&quot;</span></span></code></pre></div>
+<hr />
+<h3>Aliases - shortcuts for often used functions</h3>
+<p>Aliases are handy shortcuts for use in <code>mycommands.sh</code> <em>only</em>, they avoid error prone typing of "${CHAT[ID]}" "${USER[ID]}" as much as possible. Do not use them in other files e.g. <code>bashbot.sh</code>, modules, addons etc.</p>
+<h5>_is_botadmin</h5>
+<p><em>usage:</em> _is_botadmin</p>
+<p><em>alias for:</em> user_is_botadmin "${USER[ID]}"</p>
+<h5>_is_admin</h5>
+<p><em>usage:</em> _is_admin</p>
+<p><em>alias for:</em> user_is_admin "${CHAT[ID]}" "${USER[ID]}"</p>
+<h5>_is_allowed</h5>
+<p><em>usage:</em> _is_allowed "what"</p>
+<p><em>alias for:</em> user_is_allowed "${USER[ID]}" "what" "${CHAT[ID]}"</p>
+<hr />
+<h5>_kick_user</h5>
+<p><em>usage:</em> _kick_user "USER[ID]"</p>
+<p><em>alias for:</em> kick_chat_member "${CHAT[ID]}" "${USER[ID]}"</p>
+<h5>_unban</h5>
+<p><em>usage:</em> _unban "USER[ID]"</p>
+<p><em>alias for:</em> unban_chat_member "${CHAT[ID]}" "${USER[ID]}"</p>
+<h5>_leave</h5>
+<p><em>usage:</em> _leave</p>
+<p><em>alias for:</em> leave_chat "${CHAT[ID]}"</p>
+<hr />
+<h5>_message</h5>
+<p><em>usage:</em> _message "message"</p>
+<p><em>alias for:</em> send_normal_message "${CHAT[ID]}" "message"</p>
+<h5>_normal_message</h5>
+<p><em>usage:</em> _normal_message "message"</p>
+<p><em>alias for:</em> send_normal_message "${CHAT[ID]}" "message"</p>
+<h5>_html_message</h5>
+<p><em>usage:</em> _html_message "message"</p>
+<p><em>alias for:</em> send_html_message "${CHAT[ID]}" "message"</p>
+<h5>_markdown_message</h5>
+<p><em>usage:</em> _markdown_message "message"</p>
+<p><em>alias for:</em> send_markdown_message "${CHAT[ID]}" "message"</p>
+<hr />
+<h4>_keyboard_numpad</h4>
+<p><em>usage:</em> _keyboard_numpad</p>
+<p><em>alias for:</em> send_keyboard "${CHAT[ID]}" "" '["1","2","3"],["4","5","6"],["7","8","9"],["-","0","."]' "yes"</p>
+<h4>_keyboard_yesno</h4>
+<p><em>usage:</em> _keyboard_yesno</p>
+<p><em>alias for:</em> send_keyboard '["yes","no"]'</p>
+<h4>_del_keyboard</h4>
+<p><em>usage:</em> _del_keyboard</p>
+<p><em>alias for:</em> remove_keyboard "${CHAT[ID]}" ""</p>
+<hr />
+<h3>Helper functions</h3>
+<h5>_exec_if_function</h5>
+<p>Returns true, even if the given function does not exist. Return false if function exist but returns false.</p>
+<p><em>usage:</em> _exec_if_function function</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb57-1"><a href="#cb57-1"></a><span class="ex">_exec_if_function</span> <span class="st">&quot;answer_inline_query&quot;</span> <span class="st">&quot;</span><span class="va">${iQUERY[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;Answer params&quot;</span></span>
+<span id="cb57-2"><a href="#cb57-2"></a></span>
+<span id="cb57-3"><a href="#cb57-3"></a><span class="co"># fast replacement for module functions exists check:</span></span>
+<span id="cb57-4"><a href="#cb57-4"></a><span class="kw">if</span> <span class="ex">_is_function</span> <span class="st">&quot;answer_inline_query&quot;</span></span>
+<span id="cb57-5"><a href="#cb57-5"></a><span class="kw">then</span></span>
+<span id="cb57-6"><a href="#cb57-6"></a>    <span class="st">&quot;answer_inline_query&quot;</span> <span class="st">&quot;</span><span class="va">${iQUERY[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;Answer params&quot;</span></span>
+<span id="cb57-7"><a href="#cb57-7"></a><span class="kw">fi</span></span>
+<span id="cb57-8"><a href="#cb57-8"></a></span></code></pre></div>
+<h5>_exists</h5>
+<p>Returns true if the given function exist, can be used to check if a module is loaded.</p>
+<p><em>usage</em> _exists command</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb58-1"><a href="#cb58-1"></a><span class="ex">_exists</span> <span class="st">&quot;curl&quot;</span> <span class="kw">&amp;&amp;</span> <span class="ex">_message</span> <span class="st">&quot;Command curl is not installed!&quot;</span></span></code></pre></div>
+<h5>_is_function</h5>
+<p>Returns true if the given function exist, can be used to check if a module is loaded.</p>
+<p><em>usage</em> _is_function function</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb59-1"><a href="#cb59-1"></a><span class="ex">_is_function</span> <span class="st">&quot;background&quot;</span> <span class="kw">&amp;&amp;</span> <span class="ex">_message</span> <span class="st">&quot;you can run background jobs!&quot;</span></span></code></pre></div>
+<hr />
+<h3>Bashbot internal functions</h3>
+<p>These functions are for internal use only and must not used in your bot commands.</p>
+<h5>procname</h5>
+<p>Returns PrefixBotname_Postfix</p>
+<p><em>usage:</em> procname postfix prefix</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb60-1"><a href="#cb60-1"></a><span class="co"># returns botname, if already set</span></span>
+<span id="cb60-2"><a href="#cb60-2"></a><span class="ex">procname</span> </span>
+<span id="cb60-3"><a href="#cb60-3"></a><span class="co"># returns unique identifier for everything related to chat</span></span>
+<span id="cb60-4"><a href="#cb60-4"></a><span class="ex">procname</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span></span>
+<span id="cb60-5"><a href="#cb60-5"></a><span class="co"># returns unique identifier for job, regardless of chat</span></span>
+<span id="cb60-6"><a href="#cb60-6"></a><span class="ex">procname</span> <span class="st">&quot;&quot;</span> <span class="st">&quot;back-jobname-&quot;</span></span>
+<span id="cb60-7"><a href="#cb60-7"></a><span class="co"># returns unique identifier for a job related to a chat</span></span>
+<span id="cb60-8"><a href="#cb60-8"></a><span class="co"># e.g. fifo, cmd and logfile name</span></span>
+<span id="cb60-9"><a href="#cb60-9"></a><span class="ex">procname</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;back-jobname-&quot;</span></span></code></pre></div>
+<h5>proclist</h5>
+<p>Returns process IDs of current bot processes containing string 'pattern' in name or argument.</p>
+<p><em>usage:</em> proclist pattern</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb61-1"><a href="#cb61-1"></a><span class="co"># list PIDs of all background processes</span></span>
+<span id="cb61-2"><a href="#cb61-2"></a><span class="ex">proclist</span> <span class="st">&quot;back-&quot;</span></span>
+<span id="cb61-3"><a href="#cb61-3"></a><span class="co"># list PIDs of all processes of a job</span></span>
+<span id="cb61-4"><a href="#cb61-4"></a><span class="ex">proclist</span> <span class="st">&quot;back-jobname-&quot;</span></span>
+<span id="cb61-5"><a href="#cb61-5"></a><span class="co"># list PIDs of all processes for a chat</span></span>
+<span id="cb61-6"><a href="#cb61-6"></a><span class="ex">proclist</span> <span class="st">&quot;_</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span></span>
+<span id="cb61-7"><a href="#cb61-7"></a><span class="co"># list PIDs of all bot processes</span></span>
+<span id="cb61-8"><a href="#cb61-8"></a><span class="ex">proclist</span> </span></code></pre></div>
+<h5>killallproc</h5>
+<p>kill all current bot processes containing string 'pattern' in name or argument</p>
+<p><em>usage:</em> killallproc pattern</p>
+<p><em>example:</em></p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb62-1"><a href="#cb62-1"></a><span class="co"># kill all background processes</span></span>
+<span id="cb62-2"><a href="#cb62-2"></a><span class="ex">killallproc</span> <span class="st">&quot;back-&quot;</span></span>
+<span id="cb62-3"><a href="#cb62-3"></a><span class="co"># kill all processes for a chat</span></span>
+<span id="cb62-4"><a href="#cb62-4"></a><span class="ex">killallproc</span> <span class="st">&quot;_</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span></span>
+<span id="cb62-5"><a href="#cb62-5"></a><span class="co"># kill all bot processes, including YOURSELF!</span></span>
+<span id="cb62-6"><a href="#cb62-6"></a><span class="ex">killallproc</span> </span></code></pre></div>
+<hr />
+<h5>JsonDecode</h5>
+<p>Outputs decoded string to STDOUT</p>
+<p><em>usage:</em> JsonDecode "string"</p>
+<h5>Json2Array</h5>
+<p>Read JSON.sh style data from STDIN and assign to given ARRAY ARRAY name must be declared with <code>declare -A ARRAY</code> before calling</p>
+<p><em>usage:</em> Json2Array "ARRAY"</p>
+<h5>Array2Json</h5>
+<p>Output ARRAY as JSON.sh style data to STDOUT</p>
+<p><em>usage:</em> Array2Json "ARRAY"</p>
+<hr />
+<h5>get_chat_member_status</h5>
+<p><em>usage:</em> get_chat_member_status "CHAT[ID]" "USER[ID]"</p>
+<hr />
+<h5>process_client</h5>
+<p>Every Message sent to your Bot is processed by this function. It parse the send JSON and assign the found Values to bash variables.</p>
+<h5>process_updates</h5>
+<p>If new updates are available, this functions gets the JSON from Telegram and dispatch it.</p>
+<h5>process_inline</h5>
+<p>Every Inline Message sent to your Bot is processed by this function. It parse the send JSON and assign the found Values to bash variables.</p>
+<h5>start_timer</h5>
+<p>Start the the every minute timer ...</p>
+<h5>event_timer</h5>
+<p>Dispatcher for BASHBOT_EVENT_TIMER</p>
+<h5>event_timer</h5>
+<p>Dispatcher for BASHBOT_EVENT_INLINE</p>
+<h5>event_timer</h5>
+<p>Dispatcher for BASHBOT_EVENT_MESSAGE and related</p>
+<hr />
+<h5>getBotName</h5>
+<p>The name of your bot is available as bash variable "$ME", there is no need to call this function if Bot is running.</p>
+<p><em>usage:</em> ME="$(getBotName)"</p>
+<h4><a href="5_practice.html">Prev Best Practice</a></h4>
+<h4><a href="7_develop.html">Next Notes for Developers</a></h4>
+<h4>$$VERSION$$ v1.5-0-g8adca9b</h4>
+</body>
+</html>

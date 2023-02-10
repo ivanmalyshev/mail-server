@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Bashobot Documentation - examples/webhook/README.html</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Bashobot Documentation - examples/webhook/README.html</h1>
+</header>
+<h4><a href="../README.html">Examples</a></h4>
+<h2>Bashbot webhook example</h2>
+<h3>Webhook</h3>
+<p>Bashbot default mode is to poll Telegram server for updates but Telegram offers webhook as a more efficient method to deliver updates. If your server is reachable from the Internet its possible to use the method described here.</p>
+<p>Prerequisite for receiving Telegram updates with webhook is a valid SSL certificate, a self signed certificate will not be sufficient.</p>
+<p>Webhook processing require special setup on server and Telegram side, therefore it's implemented as separate scripts and you need at least sudo rights to setup.</p>
+<h4>Setup Apache webhook</h4>
+<p>Prerequisite: An Apache webserver with a valid SLL certificate chain and php enabled.<br />
+This should work with other webservers also but it's not testet.</p>
+<p>Setup webhook with Apache:</p>
+<ul>
+<li>install bashbot as described in <a href="../html/0_install.html">Bashbot Installation</a></li>
+<li>create file <code>data-bot-bash/webhook-fifo-&lt;botname&gt;</code> (<em>&lt;botname&gt; as in <code>botconfig.jssh</code></em>)</li>
+<li>run <code>sudo bashbot.sh init</code> to setup bashbot to run as same user as web server (<em>e.g. www</em>)</li>
+<li>create a directory in web root: <code>telegram/&lt;your_bot_token&gt;</code> (<em>&lt;your_bot_token&gt; as <code>botconfig.jssh</code></em>)</li>
+<li>give web server access to directory (<em>e.g.<code>chown www:www -R telegram</code></em>)</li>
+<li>go into the new directory and copy all files from <code>examples/webhook</code> to it</li>
+<li>edit file <code>BASHBOT_HOME</code> to contain ithe Bashbot installation directory as first line (<em>other lines are ignored</em>)</li>
+<li>execute <code>php index.php</code> with user id of web server to test write access to `data-bot-bash/webhook-fifo-<botname></li>
+</ul>
+<p>Calling <code>https://&lt;yourservername&gt;/telegram/&lt;your_bot_token&gt;/</code> will execute <code>index.php</code> thus append received data to the file <code>data-bot-bash/webhook-fifo-&lt;botname&gt;</code>. E.g. <code>https://&lt;yourservername&gt;/telegram/&lt;your_bot_token&gt;/?json={"test":"me"}</code> will append <code>{"test":"me"}</code>.</p>
+<p>Now your Server is ready to receive updates from Telegram.</p>
+<h4>Default webhook processing</h4>
+<p>This is the testet and supported default method for processing Telegram updates over webhook.</p>
+<p>To enable update processing delete the file <code>data-bot-bash/webhook-fifo-&lt;botname&gt;</code> if webhook is working as described above. Incoming Telegram updates are now forwarded to the script <code>bin/process_update.sh</code> for processing.</p>
+<p>On incoming Telegram updates the script is executed, it sources bashbot.sh and forward the update to Bashbot for processing. Even it seems overhead to source Bashbot for every update, it's more responsive and create less load than Bashbot polling mode.</p>
+<p>Nevertheles there are some limitations compared to polling mode:</p>
+<ul>
+<li>no startup actions</li>
+<li><code>addons</code> and <code>TIMER_EVENTS</code> are not working</li>
+</ul>
+<p>Interactive and background jobs are working as of Bashbot Version 1.51.</p>
+<h4>Full webhook processing</h4>
+<p>Full webhook processing use an external script to imitate Bashbot polling mode with webhook.</p>
+<ol>
+<li>Default webook method must work first!</li>
+<li>run <code>bashbot.sh init</code> to setup bashbot to run with your user id</li>
+<li>Create a named pipe: <code>mkfifo data-bot-bash/webhook-fifo-botname</code> and give the web server write access to it</li>
+<li>execute <code>php index.php</code> with user id of web server to test write access to `data-bot-bash/webhook-fifo-<botname></li>
+<li>Start script for Bashbot webhook polling mode:<br />
+<code>bin/process-batch.sh --startbot --watch data-bot-bash/webhook-fifo-&lt;botname&gt;</code></li>
+</ol>
+<p>The script read updates from given file line by line and forward updates to Bashbot update processing. <code>--startbot</code> will run the startup actions (<em>e.g. load addons, start TIMER, trigger first run</em>) and <code>--watch</code> will wait for new updates instead of exit on end of file. Short form: 'bin/process-batch.sh -s -w'</p>
+<p>If script works as expected, you may run Bashbot webook polling in background by using <code>./bachbot.rc starthook/stophook</code>.</p>
+<p>To switch back to default processing delete fifo <code>data-bot-bash/webhook-fifo-&lt;botname&gt;</code> and stop <code>bin/process-batch.sh</code>.</p>
+<h4>Enable webhook on Telegram side</h4>
+<p>To get updates via webhook your server must be reachable from the internet and you must instruct Telegram where to deliver updates, this is done by calling bashbot function <code>set_webhook</code>.</p>
+<p><em>Example:</em></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="ex">bin/any_command.sh</span> set_webhook <span class="st">&quot;https://myserver.com/telegram&quot;</span></span></code></pre></div>
+<p>instruct Telegram to use the URL <code>https://myserver.com/telegram/&lt;your_bot_token&gt;/</code> to deliver updates. After you enable webhook to deliver Telegram updates it's no more possible to poll updates with <code>bashbot.sh start</code>.</p>
+<p>To stop delivering of Telegram updates via webhook run <code>bin/any_command.sh delete_webhook</code>.</p>
+<p><strong>Important</strong>: Telegram will refuse to deliver updates if your webhook has no valid SSL certificate chain.</p>
+<h4>Bash webhook</h4>
+<p>A pure bash webhook implementation is not possible without extra software because Telegram delivers webhook updates only over secure TLS connections with a valid SSL certificate chain.</p>
+<p><code>socat</code> looks like a tool to listen for Telegram updates from bash scripts, let's see ...</p>
+<h4>$$VERSION$$ v1.52-1-g0dae2db</h4>
+</body>
+</html>

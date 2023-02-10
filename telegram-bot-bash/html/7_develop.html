@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Bashobot Documentation - doc/7_develop.html</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Bashobot Documentation - doc/7_develop.html</h1>
+</header>
+<h4><a href="../README.html">Home</a></h4>
+<h2>Notes for bashbot developers</h2>
+<p>This section is about help and best practices for new bashbot developers. The main focus on is creating new versions of bashbot, modules and addons, not on developing your individual bot. Nevertheless the information provided here should also help you with your bot development.</p>
+<p>If you want to provide fixes or new features <a href="https://help.github.com/en/articles/fork-a-repo">fork bashbot on github</a> and provide changes as <a href="https://help.github.com/en/articles/creating-a-pull-request">pull request on github</a>.</p>
+<h3>Debugging Bashbot</h3>
+<p>Usually all bashbot output is discarded. If you want to get error messages (and more) start bashbot <code>./bashbot.sh startbot debug</code>. you can the change the level of verbosity of the debug argument:</p>
+<pre><code>    &quot;debug&quot;     all output is redirected to `DEBUG.log`, in addition every incoming message is logged in `MESSAGE.log` and `INLINE.log`
+    &quot;xdebug&quot;    same as debug plus set bash option &#39;-x&#39; to log any executed command in `DEBUG.log`
+</code></pre>
+<p>Use the command <code>tail</code> to watch your bot live, e.g. <code>tail -f DEBUG.log</code>. To obtain more information place <code>set -x; ... set +x</code> around suspected code.</p>
+<p>Sometimes it's useful to watch the bot live in the terminal:</p>
+<pre><code>    &quot;debugx&quot;    debug output and errors are sent to terminal
+    &quot;xdebugx&quot;   same as debugx plus set bash option &#39;-x&#39; to show any executed command
+</code></pre>
+<p>Logging of Telegram update poll is disabled by default, also in <code>debug</code> mode. To enable it without using verbose <code>xdebug</code> mode set <code>BASHBOT_UPDATELOG</code> to an empty value (not unset) <code>export BASHBOT_UPDATELOG=""</code></p>
+<h3>Modules and Addons</h3>
+<p><strong>Modules</strong> resides in <code>modules/*.sh</code> and are colletions of optional bashbot functions grouped by functionality. Main reason for creating modules was to keep 'bashbot.sh' small, while extending functionality. In addition not every function is needed by all bots, so you can disable modules, e.g. by rename the respective module file to 'module.sh.off'.</p>
+<p>Modules must use only functions provided by 'bashbot.sh' or the module itself and should not depend on other modules or addons. The only mandatory module is 'module/sendMessage.sh'.</p>
+<p>If an optional module is used in 'bashbot.sh' or 'commands.sh', the use of <code>_is_function</code> or <code>_execute_if_function</code> is mandatory to catch absence of the module.</p>
+<p><strong>Addons</strong> resides in <code>addons/*.sh.dist</code> and are not enabled by default. To activate an addon rename it to end with '.sh', e.g. by <code>cp addons/example.sh.dist addons/example.sh</code>.</p>
+<p>Addons must register themself to BASHBOT_EVENTS at startup, e.g. to call a function every time a message is received. Addons works similar as 'commands.sh' and 'mycommands.sh' but are much more flexible on when functions/commands are triggered.</p>
+<p>Another major difference is: While regular command processing is done in a new sub shell for every command, <strong>Addons are executed in the context of bashbot event loop!</strong>, This is why event functions are (time) critical and must return as fast as possible. <strong>If an event function call exit, also bashbot exits!</strong></p>
+<p><em>Important</em>: Spawn a new sub shell in background for your processing commands and when calling bashbot functions, e.g. send_messages. This prevents blocking or exiting bashbots event loop.</p>
+<h4>Bashbot Events</h4>
+<p>Addons must register functions to bashbot events by providing their name, and internal identifier and a callback function. If an event occurs each registered function for the event is called.</p>
+<p>Registered functions run in the same process as bashbot, not as a sub process, so variables set here are persistent as long bashbot is running.</p>
+<p>Note: For the same reason event function MUST return immediately! Time consuming tasks must be run as a background process, e.g. "long running &amp;"</p>
+<h5>SEND RECEIVE events</h5>
+<p>A RECEIVE event is executed when a Message is received, same iQuery / Message variables are available as in commands.sh</p>
+<ul>
+<li><code>BASHBOT_EVENT_INLINE</code> an inline query is received</li>
+<li><code>BASHBOT_EVENT_MESSAGE</code> any of the following message types is received</li>
+<li><code>BASHBOT_EVENT_TEXT</code> a message containing text is received</li>
+<li><code>BASHBOT_EVENT_CMD</code> a message containing a command is received (starts with /)</li>
+<li><code>BASHBOT_EVENT_REPLYTO</code> a reply to a message is received</li>
+<li><code>BASHBOT_EVENT_FORWARD</code> a forwarded message is received</li>
+<li><code>BASHBOT_EVENT_CONTACT</code> a contact is received</li>
+<li><code>BASHBOT_EVENT_LOCATION</code> a location or a venue is received</li>
+<li><code>BASHBOT_EVENT_FILE</code> a file is received</li>
+</ul>
+<p><em>usage</em>: BASHBOT_EVENT_xxx[ "unique-name" ]="callback"</p>
+<p>"unique-name" can be every alphanumeric string incl. '-' and '_'. Per convention the name of the addon followed by an internal identyfier should be used.</p>
+<p>"callback" is called as the the parameters "event" "unique-name" "debug", where "event" is the event name in lower case, e.g. inline, messagei, text ... , and "unique-name" is the name provided when registering the event.</p>
+<p><em>Example:</em> Register a function to echo to any Text sent to the bot</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># register callback:</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="va">BASHBOT_EVENT_TEXT[</span><span class="st">&quot;example_1&quot;</span><span class="va">]=</span><span class="st">&quot;example_echo&quot;</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="co"># function called if a text is received</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="fu">example_echo()</span> <span class="kw">{</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>    <span class="bu">local</span> <span class="va">event=</span><span class="st">&quot;</span><span class="va">$1</span><span class="st">&quot;</span> <span class="va">key=</span><span class="st">&quot;</span><span class="va">$2</span><span class="st">&quot;</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>    <span class="co"># all available bashbot functions and variables can be used</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a>    <span class="ex">send_normal_message</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;Event: </span><span class="va">${event}</span><span class="st"> Key: </span><span class="va">${key}</span><span class="st"> : </span><span class="va">${MESSAGE[0]}</span><span class="st">&quot;</span> <span class="kw">&amp;</span> <span class="co"># run in background!</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a></span>
+<span id="cb3-10"><a href="#cb3-10"></a>    <span class="kw">(</span> <span class="va">MYTEXT=</span><span class="st">&quot;</span><span class="va">${MESSAGE[0]}</span><span class="st">&quot;</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a>      <span class="ex">do_more_processing</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a>    <span class="kw">)</span> <span class="kw">&amp;</span> <span class="co"># run as sub shell in background!</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="kw">}</span></span></code></pre></div>
+<p>An SEND event is executed when a Message is send to telegram.</p>
+<ul>
+<li><code>BASHBOT_EVENT_SEND</code> is executed if data is send or uploaded to Telegram server</li>
+</ul>
+<p>In contrast to other events, BASHBOT_EVENT_SEND is executed in a sub shell, so there is no need to spawn a background process for longer running commands and changes to variables are not persistent!</p>
+<p>BASHBOT_EVENT_SEND is for logging purposes, you must not send messages while processing this event. To avoid wrong use of EVENT_SEND, e.g. fork bomb, event processing is suspended if recursion is detected.</p>
+<p><em>usage</em>: BASHBOT_EVENT_SEND[ "unique-name" ]="callback"</p>
+<p>"callback" is called with parameter "send" or "upload", followed by the arguments used for 'sendJson' or 'upload' functions.</p>
+<p><em>Example:</em></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># register callback:</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="va">BASHBOT_EVENT_SEND[</span><span class="st">&quot;example_log&quot;</span><span class="va">,</span><span class="st">&quot;1&quot;</span><span class="va">]=</span><span class="st">&quot;example_log&quot;</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="va">EXAMPLE_LOG=</span><span class="st">&quot;</span><span class="va">${BASHBOT_ETC:-</span>.<span class="va">}</span><span class="st">/addons/</span><span class="va">${EXAMPLE_ME}</span><span class="st">.log&quot;</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="co"># Note: do not call any send message functions from EVENT_SEND!</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="fu">example_log()</span><span class="kw">{</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a>    <span class="bu">local</span> <span class="va">send=</span><span class="st">&quot;</span><span class="va">$1</span><span class="st">&quot;</span>; <span class="bu">shift</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a>    <span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$(</span><span class="fu">date</span><span class="va">)</span><span class="st">: Type: </span><span class="va">${send}</span><span class="st"> Args: </span><span class="va">$*</span><span class="st">&quot;</span> <span class="op">&gt;&gt;</span><span class="st">&quot;</span><span class="va">${EXAMPLE_LOG}</span><span class="st">&quot;</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="kw">}</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a></span></code></pre></div>
+<h5>TIMER events</h5>
+<p>Important: Bashbot timer tick is disabled by default and must be enabled by setting BASHBOT_START_TIMER to any value not zero.</p>
+<ul>
+<li><code>BASHBOT_EVENT_TIMER</code> is executed every minute and can be used in 3 variants: oneshot, once a minute, every X minutes.</li>
+</ul>
+<p>Registering to BASHBOT_EVENT_TIMER works similar as for message events, but you must add a timing argument to the name. EVENT_TIMER is triggered every 60s and waits until the current running command is finished, so it's not exactly every minute, but once a minute.</p>
+<p>Every time EVENT_TIMER is triggered the variable "EVENT_TIMER" is increased. each callback is executed if <code>EVENT_TIMER % time</code> is '0' (true). This means if you register an every 5 minutes callback first execution may &lt; 5 Minutes, all subsequent executions are once every 5. Minute.</p>
+<p><em>usage:</em> BASHBOT_EVENT_TIMER[ "name" , "time" ], where time is:</p>
+<pre><code>* 0 ignored
+* 1 execute once every minute
+* x execute every x minutes
+* -x execute once WITHIN the next x Minutes (next 10 Minutes since start &quot;event&quot;)
+</code></pre>
+<p>Note: If you want exact "in x minutes" use "EVENT_TIMER" as reference: <code>(EVENT_TIMER +x)</code></p>
+<p><em>Example:</em></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># register callback:</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="va">BASHBOT_EVENT_TIMER[</span><span class="st">&quot;example_every&quot;</span><span class="va">,</span><span class="st">&quot;1&quot;</span><span class="va">]=</span><span class="st">&quot;example_everymin&quot;</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co"># function called every minute</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="fu">example_everymin()</span> <span class="kw">{</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>    <span class="co"># timer events has no chat id, so send to yourself</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a>    <span class="ex">send_normal_message</span> <span class="st">&quot;</span><span class="op">$(&lt;</span> <span class="st">&quot;</span><span class="va">${BOTADMIN}</span><span class="st">)&quot;</span> <span class="st">&quot;</span><span class="va">$(</span><span class="fu">date</span><span class="va">)</span><span class="st">&quot;</span> &amp; <span class="co"># note the &amp;!</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a>}</span>
+<span id="cb6-9"><a href="#cb6-9"></a></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="co"># register other callback:</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a>BASHBOT_EVENT_TIMER[<span class="st">&quot;example_every5&quot;</span>,<span class="st">&quot;5&quot;</span>]=<span class="st">&quot;example_every5min&quot;</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="co"># execute once on the next 10 minutes since start &quot;event&quot;</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a>BASHBOT_EVENT_TIMER[<span class="st">&quot;example_10min&quot;</span>,<span class="st">&quot;-10&quot;</span>]=<span class="st">&quot;example_in10min&quot;</span></span>
+<span id="cb6-15"><a href="#cb6-15"></a></span>
+<span id="cb6-16"><a href="#cb6-16"></a><span class="co"># once in exact 10 minutes, note the -</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a>BASHBOT_EVENT_TIMER[<span class="st">&quot;example_10min&quot;</span>,<span class="st">&quot;-</span><span class="va">$((</span> EVENT_TIMER+10 <span class="va">))</span><span class="st">&quot;</span>]=<span class="st">&quot;example_in10min&quot;</span></span>
+<span id="cb6-18"><a href="#cb6-18"></a></span></code></pre></div>
+<hr />
+<h4>Create a stripped down version of your Bot</h4>
+<p>Currently bashbot is more a bot development environment than a bot, containing examples, developer scripts, modules, documentation and more. You don't need all these files after you're finished with your cool new bot.</p>
+<p>Let's create a stripped down version:</p>
+<ul>
+<li>delete all modules you do not need from <code>modules</code>, e.g. <code>modules/inline.sh</code> if you don't use inline queries</li>
+<li>delete unused standard commands and messages from <code>commands.sh</code></li>
+<li>delete unused commands and functions from <code>mycommands.sh</code></li>
+<li>run <code>dev/make-standalone.sh</code> to create a a stripped down version of your bot</li>
+</ul>
+<p>Now have a look at the directory <code>standalone</code>, here you find the files <code>bashbot.sh</code> and <code>commands.sh</code> containing everything to run your bot. <a href="https://github.com/topkecleon/telegram-bot-bash/blob/master/dev/make-standalone.sh">Download make-standalone.sh</a> from github.</p>
+<h3>Setup your develop environment</h3>
+<ol>
+<li>install the commands git <a href="5_practice.html">shellcheck</a> bc pandoc zip codespell</li>
+<li>setup your <a href="4_expert.html">environment for UTF-8</a></li>
+<li>clone your bashbot fork to a new directory <code>git clone https://github.com/&lt;YOURNAME&gt;/telegram-bot-bash.git</code>, replace <code>&lt;YOURNAME&gt;</code> with your username on github</li>
+<li>create and change to your develop branch <code>git checkout -b develop</code></li>
+<li>give your (dev) fork a new version tag: <code>git tag v1.xx</code></li>
+<li>setup github hooks by running <code>dev/install-hooks.sh</code></li>
+</ol>
+<p>Run <code>dev/make-distribution.sh</code> to create installation archives and a test installation in <code>DIST/</code>. To update the test installation, e.g. after git pull, local changes or switch master/develop, run <code>dev/make-distribution.sh</code> again.</p>
+<p>Note for Debian: Debian Buster ships older versions of many utilities, pls try to install from <a href="https://backports.debian.org/Instructions/">buster-backports</a></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">sudo</span> apt-get -t buster-backports install git shellcheck pandoc codespell curl</span></code></pre></div>
+<h4>Test, Add, Push changes</h4>
+<p>A typical bashbot develop loop looks as follow:</p>
+<ol>
+<li>start developing - <em>change, copy, edit bashbot files ...</em></li>
+<li>after changing a bash script: <code>shellcheck -x script.sh</code></li>
+<li><code>dev/all-tests.sh</code> - <em>in case if errors back to 2.</em></li>
+<li><code>dev/git-add.sh</code> - <em>check for changed files, update version string, run git add</em></li>
+<li><code>git commit -m "COMMIT MESSAGE"; git push</code></li>
+</ol>
+<p><strong>If you setup your dev environment with hooks and use the scripts above, versioning, adding and testing is done automatically.</strong></p>
+<h4>common commands</h4>
+<p>We state bashbot is a bash only bot, but this is not true. bashbot is a bash script using bash features PLUS external commands. Usually bash is used in a Linux/Unix environment where many (GNU) commands are available, but if commands are missing, bashbot may not work.</p>
+<p>To avoid this and make bashbot working on as many platforms as possible - from embedded Linux to mainframe - I recommend to restrict ourself to the common commands provided by bash and coreutils/busybox/toybox. See <a href="https://www.gnu.org/software/bash/manual/html_node/Shell-Builtin-Commands.html">Bash Builtins</a>, <a href="https://en.wikipedia.org/wiki/List_of_GNU_Core_Utilities_commands">coreutils</a>, <a href="https://en.wikipedia.org/wiki/BusyBox#Commands">busybox</a> and <a href="https://landley.net/toybox/help.html">toybox</a></p>
+<p>Available commands in bash, coreutils, busybox and toybox. Do you find curl on the list?</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a>    <span class="ex">.*</span>, [*, [[*, basename, break, builtin*, bzcat, caller*, cat, cd*, chattr,</span>
+<span id="cb8-2"><a href="#cb8-2"></a>    <span class="fu">chgrp</span>, chmod, chown, clear, command*, continue *, cp, cut, date, declare*,</span>
+<span id="cb8-3"><a href="#cb8-3"></a>    <span class="fu">dc</span>, dd, df, diff, dirname, du, echo*, eval*, exec*, exit *, expr*, find,</span>
+<span id="cb8-4"><a href="#cb8-4"></a>    <span class="fu">fuser</span>, getopt*, grep, hash*, head, hexdump, id, kill, killall, last, length,</span>
+<span id="cb8-5"><a href="#cb8-5"></a>    <span class="fu">less</span>, let*, ln, local*, logname, ls, lsattr, lsmod, man, mapfile*, md5sum, mkdir,</span>
+<span id="cb8-6"><a href="#cb8-6"></a>    <span class="fu">mkfifo</span>, mknod, more, mv, nice, nohup, passwd, patch, printf*, ps, pwd*, read*,</span>
+<span id="cb8-7"><a href="#cb8-7"></a>    <span class="ex">readarray*</span>, readonly* return*, rm, rmdir, sed, seq, sha1sum, shift*, sleep,</span>
+<span id="cb8-8"><a href="#cb8-8"></a>    <span class="bu">source</span>*, sort, split, stat, strings, su, sync, tail, tar, tee, test,</span>
+<span id="cb8-9"><a href="#cb8-9"></a>    <span class="bu">time</span>, times*, timeout, touch, tr, trap*, true, umask*, usleep, uudecode,</span>
+<span id="cb8-10"><a href="#cb8-10"></a>    <span class="ex">uuencode</span>, wc, wget, which, who, whoami, xargs, yes</span></code></pre></div>
+<p>commands marked with * are bash builtins, all others are external programs. Calling an external program is more expensive then using bulitins or using an internal replacement. Here are some tipps for using builtins.:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="va">HOST=</span><span class="st">&quot;</span><span class="va">$(</span><span class="fu">hostname</span><span class="va">)</span><span class="st">&quot;</span> <span class="ex">-</span><span class="op">&gt;</span> HOST=<span class="st">&quot;</span><span class="va">$HOSTNAME</span><span class="st">&quot;</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="va">DIR=</span><span class="st">&quot;</span><span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span><span class="st">&quot;</span> <span class="ex">-</span><span class="op">&gt;</span> DIR=<span class="st">&quot;</span><span class="va">$PWD</span><span class="st">&quot;&quot;</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="st">seq 1 100 -&gt; {0..100}</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="st">data=&quot;</span><span class="va">$(</span><span class="fu">cat</span> file<span class="va">)</span><span class="st">&quot; -&gt; data=&quot;</span><span class="op">$(&lt;</span><span class="st">&quot;file&quot;</span><span class="op">)</span><span class="st">&quot;</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="st">DIR=&quot;</span><span class="va">$(</span><span class="fu">dirname</span> <span class="va">$0)</span> -<span class="op">&gt;</span> DIR=<span class="st">&quot;</span><span class="va">${0%</span>/*<span class="va">}</span><span class="st">&quot;</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a></span>
+<span id="cb9-11"><a href="#cb9-11"></a><span class="fu">date</span> -<span class="op">&gt;</span> printf<span class="st">&quot;%(%c)T\n&quot;</span> -1 <span class="co"># 100 times faster!</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a></span>
+<span id="cb9-13"><a href="#cb9-13"></a><span class="va">PROG=</span><span class="st">&quot;(</span><span class="va">$basename</span><span class="st"> </span><span class="va">$0</span><span class="st">)&quot;</span> <span class="ex">-</span><span class="op">&gt;</span> PROG=<span class="st">&quot;</span><span class="va">${0##</span>*/<span class="va">}</span><span class="st">*</span></span>
+<span id="cb9-14"><a href="#cb9-14"></a></span>
+<span id="cb9-15"><a href="#cb9-15"></a><span class="st">ADDME=&quot;</span><span class="va">$ADDME</span> something to add<span class="st">&quot; -&gt; ADDME+=&quot;</span> something to add<span class="st">&quot;&quot;</span></span>
+<span id="cb9-16"><a href="#cb9-16"></a></span>
+<span id="cb9-17"><a href="#cb9-17"></a><span class="va">VAR=</span><span class="st">&quot;</span><span class="va">$((</span> 1 + 2 <span class="va">))</span><span class="st">&quot;</span> <span class="ex">-</span><span class="op">&gt;</span> (( var=1+2 ))</span>
+<span id="cb9-18"><a href="#cb9-18"></a></span>
+<span id="cb9-19"><a href="#cb9-19"></a><span class="va">INDEX=</span><span class="st">&quot;</span><span class="va">$((</span> <span class="va">${INDEX}</span> + 1 <span class="va">))</span><span class="st">&quot;</span> <span class="ex">-</span><span class="op">&gt;</span> (( INDEX++ ))</span></code></pre></div>
+<p>For more examples see <a href="https://github.com/dylanaraps/pure-bash-bible">Pure bash bible</a></p>
+<p>The special variable <code>$_</code> stores the expanded <strong>last</strong> argument of the previous command. This allows a nice optimisation in combination with the no-op command <code>:</code>, but be aware of <code>$_</code> pitfalls.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># $_ example: mkdir plus cd to it</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="fu">mkdir</span> <span class="st">&quot;somedir-</span><span class="va">$$</span><span class="st">&quot;</span> <span class="kw">&amp;&amp;</span> <span class="bu">cd</span> <span class="st">&quot;</span><span class="va">$_</span><span class="st">&quot;</span>   <span class="co"># somedir-1234 (process id)</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="co"># manipulate a variable multiple times without storing intermediate results</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="va">foo=</span><span class="st">&quot;1a23_b__x###&quot;</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="ex">...</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="bu">:</span> <span class="st">&quot;</span><span class="va">${foo//</span>[0-9]<span class="va">}</span><span class="st">&quot;</span>   <span class="co"># a_b__x###</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="bu">:</span> <span class="st">&quot;</span><span class="va">${_%%</span>#*<span class="va">}</span><span class="st">&quot;</span>        <span class="co"># a_b__x</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="va">bar=</span><span class="st">&quot;</span><span class="va">${_/</span>__x<span class="va">/</span>_c<span class="va">}</span><span class="st">&quot;</span>   <span class="co"># a_b_c</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a></span>
+<span id="cb10-11"><a href="#cb10-11"></a></span>
+<span id="cb10-12"><a href="#cb10-12"></a><span class="co"># BE AWARE OF ...</span></span>
+<span id="cb10-13"><a href="#cb10-13"></a><span class="co"># pitfall missing quotes: $_ is LAST arg</span></span>
+<span id="cb10-14"><a href="#cb10-14"></a><span class="bu">:</span> <span class="va">${SOMEVAR}</span>        <span class="co"># &quot;String in var&quot; $_ -&gt; &quot;var&quot; </span></span>
+<span id="cb10-15"><a href="#cb10-15"></a><span class="bu">:</span> <span class="op">$(&lt;</span><span class="st">&quot;file&quot;</span><span class="op">)</span>        <span class="co"># &quot;Content     of\n  file&quot; $_ -&gt; &quot;file&quot;</span></span>
+<span id="cb10-16"><a href="#cb10-16"></a></span>
+<span id="cb10-17"><a href="#cb10-17"></a><span class="co"># pitfall [ vs. test command</span></span>
+<span id="cb10-18"><a href="#cb10-18"></a><span class="bu">[</span> <span class="ot">-n</span> <span class="st">&quot;xxx&quot;</span><span class="bu"> ]</span> <span class="kw">&amp;&amp;</span> <span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$_</span><span class="st">&quot;</span>   <span class="co"># $_ -&gt; &quot;]&quot; </span></span>
+<span id="cb10-19"><a href="#cb10-19"></a><span class="bu">test</span> -n <span class="st">&quot;xxx&quot;</span> <span class="kw">&amp;&amp;</span> <span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$_</span><span class="st">&quot;</span>  <span class="co"># $_ -&gt; &quot;xxx&quot; </span></span>
+<span id="cb10-20"><a href="#cb10-20"></a></span>
+<span id="cb10-21"><a href="#cb10-21"></a><span class="co"># pitfall command substitution: globbing and IFS is applied!</span></span>
+<span id="cb10-22"><a href="#cb10-22"></a><span class="bu">:</span> <span class="st">&quot;</span><span class="va">$(</span><span class="bu">echo</span> <span class="st">&quot;a* is born&quot;</span><span class="va">)</span><span class="st">&quot;</span># <span class="va">$_</span> -<span class="op">&gt;</span> a* is globbed even quoted!</span>
+<span id="cb10-23"><a href="#cb10-23"></a><span class="bu">:</span> <span class="st">&quot;</span><span class="va">$(</span><span class="bu">echo</span> <span class="st">&quot;a   b    c&quot;</span><span class="va">)</span><span class="st">&quot;</span># <span class="va">$_</span> -<span class="op">&gt;</span> <span class="st">&quot;a b c&quot;</span></span>
+<span id="cb10-24"><a href="#cb10-24"></a><span class="bu">:</span> <span class="st">&quot;</span><span class="op">$(&lt;</span><span class="st">&quot;file&quot;</span><span class="op">)</span><span class="st">&quot;</span>      <span class="co"># &quot;Content     of\n  file&quot; $_ -&gt; &quot;Content of file&quot;</span></span></code></pre></div>
+<h4>Prepare a new version</h4>
+<p>After some development it may time to create a new version for the users. a new version can be in sub version upgrade, e.g. for fixes and smaller additions or a new release version for new features. To mark a new version use <code>git tag NEWVERSION</code> and run <code>dev/version.sh</code> to update all version strings.</p>
+<p>Usually I start with pre versions and when everything looks good I push out a release candidate (rc) and finally the new version.</p>
+<pre><code> v0.x-devx -&gt; v0.x-prex -&gt; v0.x-rc -&gt; v0.x  ... 0.x+1-dev ...
+</code></pre>
+<p>If you release a new Version run <code>dev/make-distribution.sh</code> to create the zip and tar.gz archives in the dist directory and attach them to the github release. Do not forget to delete directory dist afterwards.</p>
+<h4>Versioning</h4>
+<p>Bashbot is tagged with version numbers. If you start a new development cycle you can tag your fork with a version higher than the current version. E.g. if you fork 'v0.60' the next develop version should tagged as <code>git tag "v0.61-dev"</code> for fixes or <code>git tag "v0.70-dev"</code> for new features.</p>
+<p>To get the current version name of your develepment fork run <code>git describe --tags</code>. The output looks like <code>v0.70-dev-6-g3fb7796</code> where your version tag is followed by the number of commits since you tag your branch and followed by the latest commit hash. see also <a href="../dev/version.sh">comments in version.sh</a></p>
+<p>To update the Version Number in files run <code>dev/version.sh files</code>, it will update the line '#### $$VERSION$$ ###' in all files to the current version name. To update version in all files run 'dev/version.sh' without parameter.</p>
+<h4>Shellcheck</h4>
+<p>For a shell script running as a service it's important to be paranoid about quoting, globbing and other common problems. So it's a must to run shellchek on all shell scripts before you commit a change. this is automated by a git hook activated in Setup step 6.</p>
+<p>To run shellcheck for a single script run <code>shellcheck -x script.sh</code>, to check all scripts run <code>dev/hooks/pre-commit.sh</code>.</p>
+<h3>bashbot test suite</h3>
+<p>Starting with version 0.70 bashbot has a test suite. To start the test suite run <code>dev/all-tests.sh</code>. all-tests.sh will return 'SUCCESS' if ALL tests pass.</p>
+<h4>enabling / disabling tests</h4>
+<p>All tests are placed in the directory <code>test</code>. To disable a test remove the execute flag from the '*-test.sh' script, to (re)enable a test make the script executable again.</p>
+<h4>creating new tests</h4>
+<p>To create a new test run <code>test/ADD-test-new.sh</code> and answer the questions, it will create the usually needed files and dirs:</p>
+<p>Each test consists of a script script named after <code>p-name-test.sh</code> <em>(where p is test pass 'a-z' and name the name of your test)</em> and an optional dir <code>p-name-test/</code> <em>(script name minus '.sh')</em> for additional files.</p>
+<p>Tests with no dependency to other tests will run in pass 'a', tests which need an initialized bashbot environment must run in pass 'd' or later. A temporary test environment is created when 'ALL-tests.sh' starts and deleted after all tests are finished.</p>
+<p>The file <code>ALL-tests.inc.sh</code> must be included from all tests and provide the test environment as shell variables:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># Test Environment</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a> <span class="va">TESTME=</span><span class="st">&quot;</span><span class="va">$(</span><span class="fu">basename</span> <span class="st">&quot;</span><span class="va">$0</span><span class="st">&quot;</span><span class="va">)</span><span class="st">&quot;</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a> <span class="va">DIRME=</span><span class="st">&quot;</span><span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span><span class="st">&quot;</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a> <span class="va">TESTDIR=</span><span class="st">&quot;</span><span class="va">$1</span><span class="st">&quot;</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a> <span class="va">LOGFILE=</span><span class="st">&quot;</span><span class="va">${TESTDIR}</span><span class="st">/</span><span class="va">${TESTME}</span><span class="st">.log&quot;</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a> <span class="va">REFDIR=</span><span class="st">&quot;</span><span class="va">${TESTME%</span>.sh<span class="va">}</span><span class="st">&quot;</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a> <span class="va">TESTNAME=</span><span class="st">&quot;</span><span class="va">${REFDIR//</span>-<span class="va">/</span> <span class="va">}</span><span class="st">&quot;</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a></span>
+<span id="cb12-9"><a href="#cb12-9"></a><span class="co"># common filenames</span></span>
+<span id="cb12-10"><a href="#cb12-10"></a> <span class="va">TOKENFILE=</span><span class="st">&quot;token&quot;</span></span>
+<span id="cb12-11"><a href="#cb12-11"></a> <span class="va">ACLFILE=</span><span class="st">&quot;botacl&quot;</span></span>
+<span id="cb12-12"><a href="#cb12-12"></a> <span class="va">COUNTFILE=</span><span class="st">&quot;count&quot;</span></span>
+<span id="cb12-13"><a href="#cb12-13"></a> <span class="va">ADMINFILE=</span><span class="st">&quot;botadmin&quot;</span></span>
+<span id="cb12-14"><a href="#cb12-14"></a> <span class="va">DATADIR=</span><span class="st">&quot;data-bot-bash&quot;</span></span>
+<span id="cb12-15"><a href="#cb12-15"></a></span>
+<span id="cb12-16"><a href="#cb12-16"></a><span class="co"># SUCCESS NOSUCCESS -&gt; echo &quot;${SUCCESS}&quot; or echo &quot;${NOSUCCESS}&quot; </span></span>
+<span id="cb12-17"><a href="#cb12-17"></a> <span class="va">SUCCESS=</span><span class="st">&quot;   OK&quot;</span></span>
+<span id="cb12-18"><a href="#cb12-18"></a> <span class="va">NOSUCCESS=</span><span class="st">&quot;   FAILED!&quot;</span></span>
+<span id="cb12-19"><a href="#cb12-19"></a></span>
+<span id="cb12-20"><a href="#cb12-20"></a><span class="co"># default input, reference and output files</span></span>
+<span id="cb12-21"><a href="#cb12-21"></a> <span class="va">INPUTFILE=</span><span class="st">&quot;</span><span class="va">${DIRME}</span><span class="st">/</span><span class="va">${REFDIR}</span><span class="st">/</span><span class="va">${REFDIR}</span><span class="st">.input&quot;</span></span>
+<span id="cb12-22"><a href="#cb12-22"></a> <span class="va">REFFILE=</span><span class="st">&quot;</span><span class="va">${DIRME}</span><span class="st">/</span><span class="va">${REFDIR}</span><span class="st">/</span><span class="va">${REFDIR}</span><span class="st">.result&quot;</span></span>
+<span id="cb12-23"><a href="#cb12-23"></a> <span class="va">OUTPUTFILE=</span><span class="st">&quot;</span><span class="va">${TESTDIR}</span><span class="st">/</span><span class="va">${REFDIR}</span><span class="st">.out&quot;</span></span></code></pre></div>
+<p>Example test</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1"></a><span class="co">#!/usr/bin/env bash</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="co"># file: b-example-test.sh</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="co"># include common functions and definitions</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="co"># shellcheck source=test/ALL-tests.inc.sh</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="bu">source</span> <span class="st">&quot;./ALL-tests.inc.sh&quot;</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a></span>
+<span id="cb13-8"><a href="#cb13-8"></a><span class="kw">if</span><span class="bu"> [</span> <span class="ot">-f</span> <span class="st">&quot;</span><span class="va">${TESTDIR}</span><span class="st">/bashbot.sh&quot;</span><span class="bu"> ]</span>; <span class="kw">then</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a>    <span class="bu">echo</span> <span class="st">&quot;</span><span class="va">${SUCCESS}</span><span class="st"> bashbot.sh exist!&quot;</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a>    <span class="bu">exit</span> 0</span>
+<span id="cb13-11"><a href="#cb13-11"></a><span class="kw">else</span></span>
+<span id="cb13-12"><a href="#cb13-12"></a>    <span class="bu">echo</span> <span class="st">&quot;</span><span class="va">${NOSUCCESS}</span><span class="st"> </span><span class="va">${TESTDIR}</span><span class="st">/bashbot.sh missing!&quot;</span></span>
+<span id="cb13-13"><a href="#cb13-13"></a>    <span class="bu">exit</span> 1</span>
+<span id="cb13-14"><a href="#cb13-14"></a><span class="kw">fi</span></span></code></pre></div>
+<h4><a href="6_reference.html">Prev Function Reference</a></h4>
+<h4>$$VERSION$$ v1.52-1-g0dae2db</h4>
+</body>
+</html>

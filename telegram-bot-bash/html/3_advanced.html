@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Bashobot Documentation - doc/3_advanced.html</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Bashobot Documentation - doc/3_advanced.html</h1>
+</header>
+<h4><a href="../README.html">Home</a></h4>
+<h2>Advanced Features</h2>
+<h3>Access control</h3>
+<p>Bashbot offers functions to check what Telegram capabilities like <code>chat admin</code> or <code>chat creator</code> the given user has:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># return true if user is admin/owner of the bot</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="ex">user_is_botadmin</span> <span class="st">&quot;user&quot;</span>  </span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="co"># return true if user is creator or admin of a chat</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="ex">user_is_admin</span> <span class="st">&quot;chat&quot;</span> <span class="st">&quot;user&quot;</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="co"># return true if user is creator of a chat or it&#39;s a one to one chat</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="ex">user_is_creator</span> <span class="st">&quot;chat&quot;</span> <span class="st">&quot;user&quot;</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="co"># examples:</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="ex">user_is_botadmin</span> <span class="st">&quot;</span><span class="va">${USER[ID]}</span><span class="st">&quot;</span> <span class="kw">&amp;&amp;</span> <span class="ex">send_markdown_message</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;You are *BOTADMIN*.&quot;</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a></span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="ex">user_is_admin</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;</span><span class="va">${USER[ID]}</span><span class="st">&quot;</span> <span class="kw">&amp;&amp;</span> <span class="ex">send_markdown_message</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;You are *CHATADMIN*.&quot;</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a></span></code></pre></div>
+<p>In addition you can check individual capabilities of users as you must define in the file <code>./botacl</code>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># file: botacl</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="co"># a user not listed here, will return false from &#39;user_is_allowed&#39;</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="co">#</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co"># Format:</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="co"># user:resource:chat</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="co"># allow user 123456789 access to all resources in all chats</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="ex">123456789</span>:*:*</span>
+<span id="cb2-9"><a href="#cb2-9"></a></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="co"># allow user 12131415 to start bot in all chats</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="ex">12131415</span>:start:*</span>
+<span id="cb2-12"><a href="#cb2-12"></a></span>
+<span id="cb2-13"><a href="#cb2-13"></a><span class="co"># allow user 987654321 only to start bot in chat 98979695</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a><span class="ex">987654321</span>:start:98979695</span>
+<span id="cb2-15"><a href="#cb2-15"></a></span>
+<span id="cb2-16"><a href="#cb2-16"></a><span class="co"># special case allow ALL users ONE action in all groups or in one group</span></span>
+<span id="cb2-17"><a href="#cb2-17"></a><span class="ex">ALL</span>:search:*</span>
+<span id="cb2-18"><a href="#cb2-18"></a><span class="ex">ALL</span>:search:98979695</span>
+<span id="cb2-19"><a href="#cb2-19"></a></span>
+<span id="cb2-20"><a href="#cb2-20"></a><span class="co"># not valid, ALL must have an action!</span></span>
+<span id="cb2-21"><a href="#cb2-21"></a><span class="ex">ALL</span>:*:*</span>
+<span id="cb2-22"><a href="#cb2-22"></a></span>
+<span id="cb2-23"><a href="#cb2-23"></a><span class="co"># * are only allowed on the right hand side and not for user!</span></span>
+<span id="cb2-24"><a href="#cb2-24"></a><span class="co"># the following examples are NOT valid!</span></span>
+<span id="cb2-25"><a href="#cb2-25"></a><span class="ex">*</span>:*:*</span>
+<span id="cb2-26"><a href="#cb2-26"></a><span class="ex">*</span>:start:*</span>
+<span id="cb2-27"><a href="#cb2-27"></a><span class="ex">*</span>:*:98979695</span>
+<span id="cb2-28"><a href="#cb2-28"></a></span>
+<span id="cb2-29"><a href="#cb2-29"></a></span></code></pre></div>
+<p>You must use the function <code>user_is_allowed</code> to check if a user has the capability to do something. Example: Check if user has capability to start bot.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a>    <span class="kw">case</span> <span class="st">&quot;</span><span class="va">$MESSAGE</span><span class="st">&quot;</span><span class="kw"> in</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>        <span class="co">################################################</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>        <span class="co"># GLOBAL commands start here, only edit messages</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>        <span class="st">&#39;/start&#39;</span>*<span class="kw">)</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>            <span class="ex">user_is_botadmin</span> <span class="st">&quot;</span><span class="va">${USER[ID]}</span><span class="st">&quot;</span> <span class="kw">&amp;&amp;</span> <span class="ex">send_markdown_message</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;You are *BOTADMIN*.&quot;</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>            <span class="co">#  true if: user is botadmin, user is group admin, user is allowed </span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>            <span class="kw">if</span> <span class="ex">user_is_allowed</span> <span class="st">&quot;</span><span class="va">${USER[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;start&quot;</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="kw">;</span> <span class="kw">then</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a>                <span class="ex">bot_help</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a>            <span class="kw">else</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a>                <span class="ex">send_normal_message</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;You are not allowed to start Bot.&quot;</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a>            <span class="kw">;;</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a>    <span class="kw">esac</span></span></code></pre></div>
+<p><strong>See also <a href="6_reference.html">Bashbot User Access Control functions</a></strong></p>
+<h3>Interactive Chats</h3>
+<p>Interactive chats are short running scripts, reading user input and echo data to the user.</p>
+<p>To create a new interactive chat script copy <code>scripts/interactive.sh.clean</code> to e.g. <code>scripts/mynewinteractive.sh</code>, make it executable and then use <code>start_proc</code> function from your bot, it's possible to pass two arguments. You find more examples for interactive scripts in 'examples'</p>
+<p><em>usage</em>: start_proc chat_id script arg1 arg2</p>
+<p><em>usage</em>: kill_proc chat_id</p>
+<p><em>usage</em>: check_prog chat_id</p>
+<p><strong>IMPORTANT:</strong> Scripts must read user input from '$3' instead of stdin!</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co">######</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="co"># parameters</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="co"># $1 $2 args as given to start_proc chat script arg1 arg2</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="co"># $3 path to named pipe</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="co">#######################</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="co"># place your commands here</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="co">#</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="va">INPUT=</span><span class="st">&quot;</span><span class="va">${3:-</span>/dev/stdin<span class="va">}</span><span class="st">&quot;</span> <span class="co"># read from stdin if run in terminal</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a></span>
+<span id="cb4-13"><a href="#cb4-13"></a><span class="bu">echo</span> <span class="st">&quot;Enter a message:&quot;</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a><span class="bu">read</span> -r <span class="va">test</span> <span class="op">&lt;</span><span class="st">&quot;</span><span class="va">${INPUT}</span><span class="st">&quot;</span></span>
+<span id="cb4-15"><a href="#cb4-15"></a><span class="bu">echo</span> -e <span class="st">&quot;Your Message: </span><span class="va">${test}</span><span class="st">\nbye!&quot;</span></span></code></pre></div>
+<h4>message formatting and keyboards</h4>
+<p>The output of the script will be processed by <code>send_messages</code>, so you can not only send text, but also keyboards, files, locations and more. Each newline in the output will start an new message to the user. To have line breaks in your message you must insert <code>\n</code> instead.</p>
+<p>To open up a keyboard in an interactive script, print out the keyboard layout in the following way:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="bu">echo</span> <span class="st">&quot;Text that will appear in chat? mykeyboardstartshere [ </span><span class="dt">\&quot;</span><span class="st">Yep, sure</span><span class="dt">\&quot;</span><span class="st"> , </span><span class="dt">\&quot;</span><span class="st">No, highly unlikely</span><span class="dt">\&quot;</span><span class="st"> ]&quot;</span></span></code></pre></div>
+<p>Same goes for files:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="bu">echo</span> <span class="st">&quot;Text that will appear in chat? myfilestartshere /home/user/dog.jpg&quot;</span></span></code></pre></div>
+<p><em>Note</em>: Use an <em>absolute path name</em> (starting with <code>/</code>), a relative path name is relative to <code>data-bot-bash/upload</code>! See <a href="6_reference.html">send_file documentation</a> for more information.</p>
+<p>And buttons:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="bu">echo</span> <span class="st">&quot;Text that will appear in chat. mybtextstartshere Click me myburlstartshere https://dealz.rrr.de&quot;</span></span></code></pre></div>
+<p>And locations:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="bu">echo</span> <span class="st">&quot;Text that will appear in chat. mylatstartshere 45 mylongstartshere 45&quot;</span></span></code></pre></div>
+<p>And venues:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="bu">echo</span> <span class="st">&quot;Text that will appear in chat. mylatstartshere 45 mylongstartshere 45 mytitlestartshere my home myaddressstartshere Diagon Alley N. 37&quot;</span></span></code></pre></div>
+<p>You can combine them:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1"></a><span class="bu">echo</span> <span class="st">&quot;Text that will appear in chat? mykeyboardstartshere [ </span><span class="dt">\&quot;</span><span class="st">Yep, sure</span><span class="dt">\&quot;</span><span class="st"> , </span><span class="dt">\&quot;</span><span class="st">No, highly unlikely</span><span class="dt">\&quot;</span><span class="st"> ] myfilestartshere /home/user/doge.jpg mylatstartshere 45 mylongstartshere 45&quot;</span></span></code></pre></div>
+<p>Please note that you can either send a location or a venue, not both. To send a venue add the mytitlestartshere and the myaddressstartshere keywords.</p>
+<p>To insert a line break in your message you can insert <code>\n</code> in your echo command:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1"></a><span class="bu">echo</span> <span class="st">&quot;Text that will appear in one message \nwith this text on a new line&quot;</span></span></code></pre></div>
+<p>In case you want extend a message already containing a location, a file, a keyboard etc., with an additionial text simply add <code> mytextstartshere additional text</code> at the end of the string:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1"></a><span class="va">out=</span><span class="st">&quot;Text that will appear mylatstartshere 45 mylongstartshere 45&quot;</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="kw">[[</span> <span class="st">&quot;</span><span class="va">$out</span><span class="st">&quot;</span> <span class="ot">!=</span> *<span class="st">&#39;in chat&#39;</span>*<span class="kw"> ]]</span> <span class="kw">&amp;&amp;</span>  <span class="va">out=</span><span class="st">&quot;</span><span class="va">$out</span><span class="st"> mytextstartshere in chat.&quot;</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$out</span><span class="st">&quot;</span></span></code></pre></div>
+<h3>Background Jobs</h3>
+<p>A background job is similar to an interactive chat, but can be a long running job and does only output massages, user input is ignored. It's possible to run multiple background jobs from the same chat.</p>
+<p>To create a new interactive chat script copy 'scripts/interactive.sh.clean' to e.g. 'scripts/mynewbackground.sh', make it executable and then use 'start_back' function from your bot, it's possible to pass two arguments. You find more examples for background scripts in 'examples'</p>
+<p><em>usage</em>: start_back chat_id script jobname arg1 arg2</p>
+<p><em>usage</em>: kill_back chat_id jobname</p>
+<p><em>usage</em>: check_back chat_id jobname</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1"></a><span class="ex">start_back</span> <span class="st">&quot;examples/notify.sh&quot;</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;jobname&quot;</span></span></code></pre></div>
+<p>All output of the script will be sent to the user, to stop a background job use:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1"></a><span class="ex">kill_back</span> <span class="st">&quot;</span><span class="va">${CHAT[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;jobname&quot;</span></span></code></pre></div>
+<p>You can also suspend and resume currently running background jobs from outside bashbot, e.g. in your startup scripts:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1"></a><span class="ex">./bashbot.sh</span> suspendback</span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="ex">./bashbot.sh</span> resumeback</span></code></pre></div>
+<p>If you want to kill all background jobs permanently run:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1"></a><span class="ex">./bashbot.sh</span> killback</span>
+<span id="cb16-2"><a href="#cb16-2"></a></span></code></pre></div>
+<p>Note: Background jobs run independent from main bot and continue running until your script exits or you stop it. Background jobs will continue running if your Bot is stopped and must be terminated separately e.g. by <code>bashbot.sh killback</code></p>
+<h3>Inline queries</h3>
+<p><strong>Inline queries</strong> allow users to send commands to your bot from every chat without going to a private chat. An inline query is started if the user type the bots name, e.g. @myBot. Everything after @myBot is immediately send to the bot.</p>
+<p>In order to enable <strong>inline mode</strong>, send <code>/setinline</code> command to <a href="https://telegram.me/botfather">@BotFather</a> and provide the placeholder text that the user will see in the input field after typing your bot’s name.</p>
+<p>The following commands allows you to send ansers to <em>inline queries</em>. To enable bashbot to process inline queries set <code>INLINE="1"</code> in <code>mycommands.sh</code>.</p>
+<p>To send messages or links through an <em>inline query</em>:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1"></a><span class="ex">answer_inline_query</span> <span class="st">&quot;</span><span class="va">${iQUERY[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;article&quot;</span> <span class="st">&quot;Title of the result&quot;</span> <span class="st">&quot;Content of the message to be sent&quot;</span></span></code></pre></div>
+<p>To send photos in jpeg format and less than 5MB, from a website through an <em>inline query</em>:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1"></a><span class="ex">answer_inline_query</span> <span class="st">&quot;</span><span class="va">${iQUERY[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;photo&quot;</span> <span class="st">&quot;A valid URL of the photo&quot;</span> <span class="st">&quot;URL of the thumbnail&quot;</span></span></code></pre></div>
+<p>To send standard gifs from a website (less than 1MB) through an <em>inline query</em>:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1"></a><span class="ex">answer_inline_query</span> <span class="st">&quot;</span><span class="va">${iQUERY[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;gif&quot;</span> <span class="st">&quot;gif url&quot;</span></span></code></pre></div>
+<p>To send mpeg4 gifs from a website (less than 1MB) through an <em>inline query</em>:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1"></a><span class="ex">answer_inline_query</span> <span class="st">&quot;</span><span class="va">${iQUERY[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;mpeg4_gif&quot;</span> <span class="st">&quot;mpeg4 gif url&quot;</span></span></code></pre></div>
+<p>To send videos from a website through an <em>inline query</em>:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1"></a><span class="ex">answer_inline_query</span> <span class="st">&quot;</span><span class="va">${iQUERY[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;video&quot;</span> <span class="st">&quot;valid video url&quot;</span> <span class="st">&quot;Select one mime type: text/html or video/mp4&quot;</span> <span class="st">&quot;URL of the thumbnail&quot;</span> <span class="st">&quot;Title for the result&quot;</span></span></code></pre></div>
+<p>To send photos stored in Telegram servers through an <em>inline query</em>:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1"></a><span class="ex">answer_inline_query</span> <span class="st">&quot;</span><span class="va">${iQUERY[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;cached_photo&quot;</span> <span class="st">&quot;identifier for the photo&quot;</span></span></code></pre></div>
+<p>To send gifs stored in Telegram servers through an <em>inline query</em>:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1"></a><span class="ex">answer_inline_query</span> <span class="st">&quot;</span><span class="va">${iQUERY[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;cached_gif&quot;</span> <span class="st">&quot;identifier for the gif&quot;</span></span></code></pre></div>
+<p>To send mpeg4 gifs stored in Telegram servers through an <em>inline query</em>:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1"></a><span class="ex">answer_inline_query</span> <span class="st">&quot;</span><span class="va">${iQUERY[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;cached_mpeg4_gif&quot;</span> <span class="st">&quot;identifier for the gif&quot;</span></span></code></pre></div>
+<p>To send stickers through an <em>inline query</em>:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1"></a><span class="ex">answer_inline_query</span> <span class="st">&quot;</span><span class="va">${iQUERY[ID]}</span><span class="st">&quot;</span> <span class="st">&quot;cached_sticker&quot;</span> <span class="st">&quot;identifier for the sticker&quot;</span></span></code></pre></div>
+<p>See also <a href="6_reference.html">mycommands.sh</a> for more information.</p>
+<h3>Send message results</h3>
+<p>Our examples usually do not care about errors happening while sending a message, this is OK as long your bot does not send an massive aoumnt of messages. By default bashbot detects if a message is not sent and try to recover when possible, e.g. resend on throttling. In addition every send error is logged in logs/ERROR.log</p>
+<h4>Transmission results</h4>
+<p>On every message send to telegram (transmission) the results are provided in bash variables, like its done when a new message is received.</p>
+<p><strong>Note</strong>: the values of the variables contains always the result of the LAST transmission to telegram, every send action will overwrite them!</p>
+<ul>
+<li><code>$BOTSENT</code>: This array contains the parsed results from the last transmission to telegram.
+<ul>
+<li><code>${BOTSENT[OK]}</code>: contains the string <code>true</code>: after a successful transmission</li>
+<li><code>${BOTSENT[ID]}</code>: Message ID if OK is true</li>
+<li><code>${BOTSENT[ERROR]}</code>: Error code if an error occurred</li>
+<li><code>${BOTSENT[DESC]}</code>: Description text for error</li>
+<li><code>${BOTSENT[RETRY]}</code>: Seconds to wait if telegram requests throtteling.</li>
+</ul></li>
+<li><code>$res</code>: temporary variable containing the full transmission result, may be overwritten by any bashbot function.</li>
+</ul>
+<p>By default you don't have to care about retry, as bashbot resend the message after the requested time automatically. Only if the retry fails also an error is returned. The downside is that send_message functions will wait until resend is done.</p>
+<p>If you want to disable automatic error processing and handle all errors manually (or don't care) set <code>BASHBOT_RETRY</code> to any no zero value.</p>
+<p><a href="https://github.com/TelegramBotAPI/errors">Telegram Bot API error codes</a></p>
+<h4>Detect bot blocked</h4>
+<p>If the we can't connect to telegram, e.g. blocked from telegram server but also any other reason, bashbot set <code>BOTSENT[ERROR]</code> to <code>999</code>.</p>
+<p>To get a notification on every connection problem create a function named <code>bashbotBlockRecover</code> and handle blocks there. If the function returns true (0 or no value) bashbot will retry once and then return to the calling function. In case you return any non 0 value bashbot will return to the calling function without retry.</p>
+<p>Note: If you disable automatic retry, se above, you disable also connection problem notification.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1"></a>  <span class="co"># somewhere in myfunctions.sh ...</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a>  <span class="va">MYBLOCKED=</span><span class="st">&quot;0&quot;</span></span>
+<span id="cb26-3"><a href="#cb26-3"></a></span>
+<span id="cb26-4"><a href="#cb26-4"></a>  <span class="kw">function</span><span class="fu"> bashbotBlockRecover()</span> <span class="kw">{</span></span>
+<span id="cb26-5"><a href="#cb26-5"></a>      <span class="co"># ups, we are blocked!</span></span>
+<span id="cb26-6"><a href="#cb26-6"></a>      <span class="kw">((</span> MYBLOCKED++ <span class="kw">))</span></span>
+<span id="cb26-7"><a href="#cb26-7"></a>      <span class="co"># log what we got</span></span>
+<span id="cb26-8"><a href="#cb26-8"></a>      <span class="bu">printf</span> <span class="st">&quot;%s: Blocked %d times: %s\n&quot;</span> <span class="st">&quot;</span><span class="va">$(</span><span class="fu">date</span><span class="va">)</span><span class="st">&quot;</span> <span class="st">&quot;</span><span class="va">${MYBLOCKED}</span><span class="st">&quot;</span> <span class="st">&quot;</span><span class="va">$*</span><span class="st">&quot;</span> <span class="op">&gt;&gt;</span><span class="st">&quot;</span><span class="va">${ERRORLOG}</span><span class="st">&quot;</span> </span>
+<span id="cb26-9"><a href="#cb26-9"></a></span>
+<span id="cb26-10"><a href="#cb26-10"></a>      <span class="kw">if</span><span class="bu"> [</span> <span class="st">&quot;</span><span class="va">${MYBLOCKED}</span><span class="st">&quot;</span> <span class="ot">-gt</span> 10<span class="bu"> ]</span>; <span class="kw">then</span></span>
+<span id="cb26-11"><a href="#cb26-11"></a>           <span class="bu">printf</span> <span class="st">&quot;Permanent problem abort current command: %s\n&quot;</span> <span class="st">&quot;</span><span class="va">${MESSAGE}</span><span class="st">&quot;</span><span class="op">&gt;&gt;</span><span class="st">&quot;</span><span class="va">${ERRORLOG}</span><span class="st">&quot;</span></span>
+<span id="cb26-12"><a href="#cb26-12"></a>          <span class="bu">exit</span></span>
+<span id="cb26-13"><a href="#cb26-13"></a>      <span class="kw">fi</span></span>
+<span id="cb26-14"><a href="#cb26-14"></a>      <span class="kw">if</span> <span class="ex">do_something_to_unblock</span><span class="kw">;</span> <span class="kw">then</span></span>
+<span id="cb26-15"><a href="#cb26-15"></a>         <span class="co"># may be we removed block, e.g. changed IP address, try again</span></span>
+<span id="cb26-16"><a href="#cb26-16"></a>         <span class="bu">return</span> 0</span>
+<span id="cb26-17"><a href="#cb26-17"></a>      <span class="kw">fi</span></span>
+<span id="cb26-18"><a href="#cb26-18"></a>      <span class="co"># do not retry if we can&#39;t recover</span></span>
+<span id="cb26-19"><a href="#cb26-19"></a>      <span class="bu">return</span> 1</span>
+<span id="cb26-20"><a href="#cb26-20"></a>  <span class="kw">}</span></span>
+<span id="cb26-21"><a href="#cb26-21"></a></span></code></pre></div>
+<h4><a href="2_usage.html">Prev Getting started</a></h4>
+<h4><a href="4_expert.html">Next Expert Use</a></h4>
+<h4>$$VERSION$$ v1.52-1-g0dae2db</h4>
+</body>
+</html>

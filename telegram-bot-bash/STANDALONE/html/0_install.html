@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Bashobot Documentation - doc/0_install.html</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Bashobot Documentation - doc/0_install.html</h1>
+</header>
+<h4><a href="../README.html">Home</a></h4>
+<h2>Check bash installation</h2>
+<p>There may systems where bash seems to be installed but it is not (<em>e.g. embedded systems</em>) or where bash is to old. Bashbot has some builtin checks but it may better to check before installing bashbot.</p>
+<p>Run the following commands to see if your bash looks ok ...</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># system say bash is there?</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">if</span> <span class="fu">which</span> bash<span class="kw">;</span> <span class="kw">then</span> <span class="bu">echo</span> <span class="st">&quot;bash seems available...&quot;</span><span class="kw">;</span> <span class="kw">else</span> <span class="bu">echo</span> <span class="st">&quot;NO bash&quot;</span><span class="kw">;</span> <span class="kw">fi</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="co"># real bash supports ARRAY</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">bash</span> -c <span class="st">&#39;if eval &quot;a[1]=1&quot;; then echo &quot;Shell support arrays...&quot;; else echo &quot;Shell has NO arrays&quot;; fi&#39;</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="co"># check for bash version by feature</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="fu">bash</span> -c <span class="st">&#39;if [ &quot;$(LANG=C.UTF-8 echo -e &quot;\u1111&quot;)&quot; != &quot;\u1111&quot; ]; then echo &quot;Bash version ok ...&quot;; else echo &quot;Bash version may to old ...&quot;; fi&#39;</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="co"># display bash version, must be greater than 4.3</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="fu">bash</span> --version <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;bash&quot;</span></span></code></pre></div>
+<h2>Install bashbot</h2>
+<p>Installing bashbot is very simple: Download and extract the installation archive.</p>
+<ol>
+<li>Choose a directory to install bashbot (<em>e.g.your HOME or /usr/local</em>)</li>
+<li>Download <a href="https://github.com/topkecleon/telegram-bot-bash/releases/latest">latest release zip / tar archive</a> and extract all files.</li>
+<li>Change into the directory <code>telegram-bot-bash</code></li>
+<li>Copy <code>mycommands.conf.dist</code> <code>mycommands.conf</code></li>
+<li>Copy <code>mycommands.sh.dist</code> or <code>mycommands.sh.clean</code> to <code>mycommands.sh</code></li>
+<li>Run <code>./bashbot.sh init</code>* to setup the environment and enter your Bots token given by botfather.</li>
+</ol>
+<p>Edit config in <code>mycommands.conf</code> and commands in <code>mycommands.sh</code> to fit your need. Now your Bot is ready to start ...</p>
+<p><em>If you are new to Bot development read <a href="https://core.telegram.org/bots">Bots: An introduction for developers</a></em></p>
+<p>* <em>Run with sudo if you want to run bashbot from different user, e.g. from <code>bashbot.rc</code>.</em></p>
+<h3>Update bashbot</h3>
+<p>Update bashbot is almost identical to installing bashbot: Download and extract the installation archive.</p>
+<p><strong>Important: All files may overwritten, make a backup!</strong></p>
+<ol>
+<li>Go to the directory where bashbot is installed (<em>e.g.$HOME/telegram-bot-bash or /usr/local/telegram-bot-bash</em>)</li>
+<li>Download <a href="https://github.com/topkecleon/telegram-bot-bash/releases/latest">latest release zip / tar archive</a></li>
+<li>Stop all running instances of bashbot <code>./bashbot.sh stop</code></li>
+<li>Change to parent directory of bashbot installation and extract all files from archive.</li>
+<li>Run <code>./bashbot.sh init</code>* to setup your environment after the update</li>
+<li>Restart your bot <code>./bashbot.sh start</code></li>
+</ol>
+<p><code>mycommands.conf</code> and <code>mycommands.sh</code> will not overwritten, this avoids losing your bot config and commands on updates.</p>
+<p><em>Note</em>: If you are updating from a pre-1.0 version, update to <a href="https://github.com/topkecleon/telegram-bot-bash/releases/tags/v1.20">Version 1.20</a> first!</p>
+<h3>Use JSON.awk</h3>
+<p><a href="https://github.com/step-/JSON.awk">JSON.awk</a> is an awk port of <code>JSON.sh</code>, it provides the same functionality but is 5 times faster. On most systems you can use <code>JSON.awk</code> with system default awk installation. ( <a href="https://github.com/step-/JSON.awk#compatibility-with-awk-implementations">gnu awk, posix awk, mawk, busybox akw</a> ).</p>
+<p>After you have checked that <code>JSON.awk.dist</code> is working on your system copy it to <code>JSON.awk</code> and (re)start bashbot.</p>
+<p>BSD and MacOS users must install <code>gnu awk</code> and adjust the shebang, see below</p>
+<p><em>Note</em>: To install or update <code>JSON.awk</code> manually execute the following commands in the directory <code>JSON.sh/</code>:</p>
+<pre><code>wget https://cdn.jsdelivr.net/gh/step-/JSON.awk/JSON.awk 
+wget https://cdn.jsdelivr.net/gh/step-/JSON.awk/tool/patch-for-busybox-awk.sh
+bash patch-for-busybox-awk.sh
+chmod +x JSON.awk
+</code></pre>
+<h3>Install bashbot from git repo</h3>
+<p>Installation and updates should be done using the zip / tar archives provided on github to avoid problems and not overwriting your bot config and <code>mycommands.sh</code>.</p>
+<p>Nevertheless you can install or update bashbot from a git repo, see next chapter ...</p>
+<h3>Create Installation / Update archives</h3>
+<p>To install or update bashbot from git repo execute <code>dev/make-distribution.sh</code>. This creates the installation archives in <code>DIST/</code> and a ready to run test installation in <code>DIST/telegram.bot-bash</code>.</p>
+<p><em>Note:</em> You should be familiar with <code>git</code>.</p>
+<ol>
+<li>Run <code>git clone https://github.com/topkecleon/telegram-bot-bash.git</code></li>
+<li>Change into the directory <code>telegram-bot-bash</code></li>
+<li>Optional: Run <code> git checkout develop</code> for latest develop version</li>
+<li>Run <code> dev/make-distribution.sh</code> (<em>add --notest to skip tests</em>)</li>
+<li>Change to dir <code>DIST/</code></li>
+</ol>
+<p>Use the installation archives to install or update bashbot as described above.</p>
+<p>To run a test bot, e.g. while development or testing latest changes, you can use the bashbot installation provided in <code>DIST/telegram-bot-bash</code>. To update the test installation (<em>after git pull, local changes or switch master/develop</em>) run <code>dev/make-distribution.sh</code> again.</p>
+<h3>Note for BSD and MacOS</h3>
+<p><strong>On MacOS</strong> you must install a more recent version of bash, as the default bash is way to old, see e.g. <a href="http://macappstore.org/bash/">Install Bash on Mac</a></p>
+<p><strong>On BSD and MacOS</strong> I recommend to install gnu coreutils and include them in your PATH environment variable before running bashbot, e.g. the gnu versions of sed, grep, find, awk ...</p>
+<p>On BSD and MacOS you must adjust the shebang line of the scripts <code>bashbot.sh</code> and <code>json.sh</code> to point to to the correct bash or use the script: <code>examples/bash2env *.sh */*.sh</code> to convert them for you.</p>
+<p>Bashbot will stay with <code>#!/bin/bash</code> shebang, as using a fixed path is IMHO more secure than the portable '!/usr/bin/env bash` variant.</p>
+<p>Compatibility with BSD/MacOS will result in a rewrite of all grep/sed commands with an uncertain outcome, see <a href="https://riptutorial.com/sed/topic/9436/bsd-macos-sed-vs--gnu-sed-vs--the-posix-sed-specification">BSD/MacOS vs. GNU sed</a> to get an impression how different they are.</p>
+<h3>Notes on Changes</h3>
+<h4>Config moved to mycommands.conf</h4>
+<p>From Version 1.30 on config for new bots is moved to <code>mycommands.conf</code>.</p>
+<h4>Support for update from pre-1.0 removed</h4>
+<p>From Version 1.21 on updating from a pre-1.0 version (<em>no *.jssh config</em>) is no more supported! You must update to <a href="https://github.com/topkecleon/telegram-bot-bash/releases/tags/v1.20">Version 1.20</a> first!</p>
+<h4><a href="1_firstbot.html">Next Create Bot</a></h4>
+<h4>$$VERSION$$ v1.5-0-g8adca9b</h4>
+</body>
+</html>
